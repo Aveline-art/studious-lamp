@@ -14,12 +14,9 @@ kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
 
-title: Hack for LA
-email: hello@hackforla.org
-description: Can you design, write, or code? Are you an activist with an idea? You can help Los Angeles live up to its potential at Hack for LA. Everyone is welcome!
-
-baseurl: ""
-url: https://www.hackforla.org
+domain: aveline-art.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
+url: https://aveline-art.github.io  # the base hostname and protocol for your site, e.g. http://example.com
+baseurl: /studious-lamp/      # place folder name if the site is served in a subfolder
 
 collections:
   authors:
