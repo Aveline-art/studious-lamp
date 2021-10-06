@@ -1,0 +1,49 @@
+# Default Configuration: https://jekyllrb.com/docs/configuration/default/
+# Font Matter Defaults:  https://jekyllrb.com/docs/configuration/front-matter-defaults/
+# Configuration Options: https://jekyllrb.com/docs/configuration/options/
+
+# Defaults for GitHub Pages
+lsi: false
+safe: true
+source: . # your repo's top level directory
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
+
+title: Hack for LA
+email: hello@hackforla.org
+description: Can you design, write, or code? Are you an activist with an idea? You can help Los Angeles live up to its potential at Hack for LA. Everyone is welcome!
+
+baseurl: ""
+url: https://www.hackforla.org
+
+collections:
+  authors:
+    output: true
+    
+defaults:
+  - scope:
+      path: ""
+      type: "authors"
+    values:
+      layout: "author"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+

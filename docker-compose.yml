@@ -1,0 +1,13 @@
+version: "3"
+services:
+  site_support_system:
+    image: jekyll/jekyll:pages
+    container_name: site_support_system
+    command: jekyll serve --force_polling --livereload --config _config.yml,_config.docker.yml -I
+    environment:
+      - JEKYLL_ENV=docker
+    ports:
+      - 4000:4000
+      - 35729:35729
+    volumes:
+      - .:/srv/jekyll
