@@ -1,0 +1,91 @@
+.wide-div {
+  margin-top: 29px;
+  background: #030c2c;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto" sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.mobile-image {
+  @media #{$bp-below-mobile} {
+    padding: 0;
+  }
+}
+
+.credit-hero {
+  padding: 33px;
+  margin: 0px auto;
+  display: flex;
+  justify-content: space-evenly;
+
+  @media #{$bp-below-mobile} {
+    flex-direction: column;
+    text-align: -webkit-center;
+  }
+}
+
+.credits-item {
+  margin: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  
+  @media #{$bp-below-mobile} {
+    margin: 5px;
+  }
+}
+
+.page-card--credits {
+  padding: 30px;
+
+  @media #{$bp-below-mobile} {
+    padding: 32px 16px;
+  }
+}
+
+.credits-list {
+  order: 2;
+
+  @media #{$bp-tablet-up} {
+    display: grid;
+    grid-gap: 32px 54px;
+    grid-template-columns: repeat(2, 1fr);
+    order: 3;
+    width: 100%;
+  }
+}
+
+.credits-inner {
+  display: flex;
+  flex-direction: column;
+
+  @media #{$bp-mobile-up} {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.icon-left {
+  width: 100px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: center;
+  @media #{$bp-below-mobile} {
+    width: 60px;
+    padding-right: 10px;
+  }
+}
+
+.icon-info {
+  width: 190px;
+  p {
+    margin: 0;
+  }
+}
