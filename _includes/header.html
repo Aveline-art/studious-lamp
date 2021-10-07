@@ -1,0 +1,52 @@
+<header class="main-header">
+    <div class="main-header-content">
+        <a href="/#">
+            <div class="branding">
+                <div class="sr-only">Hack for LA</div>
+                {% include svg/logo-hfla.svg %}
+            </div>
+        </a>
+        <nav class="header-nav" id="headerNav">
+            <ul class="inline-list" id="mobileNavLink">
+
+                <li class="">
+                    <a href="/events">Events</a>
+                </li>
+                <li class="">
+                    <a href="/projects">Projects</a>
+                </li>
+                <li class="">
+                    <a href="/#press">Press</a>
+                </li>
+                <li class="">
+                    <a href="/join">Join Us</a>
+                </li>
+                <li class="">
+                    <a href="/toolkit">Toolkit</a>
+                </li>
+                <li class=""><a href="/wins">Wins</a></li>
+            </ul>
+        </nav>
+        <div class="header-links">
+            <ul class="inline-list header-list">
+                <li>
+                    <a href="/donate/" target="_blank">
+                        <button class="btn btn-dark btn-md-narrow btn--donate-header">
+                            Donate
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="swapButton">
+            <ul class="inline-list">
+                <li>
+                    <button id="burgerImage">
+                        {% include svg/icon-hamburger-nav.svg %}
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <script src="./assets/js/hamburger-nav.js"></script>
+    </div>
+</header>

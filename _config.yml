@@ -33,10 +33,6 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-  - scope:
-      path: ""
-    values:
-      layout: "default"
 
 plugins:
   - jekyll-sitemap
