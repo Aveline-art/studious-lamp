@@ -1,0 +1,69 @@
+.hero-inner {
+    color: $color-white;
+    margin: 60px auto 0px;
+    max-width: $max-content-width;
+    position: relative;
+    z-index: 2;
+  
+    @media #{$bp-tablet-up} {
+      margin-bottom: 0;
+      margin-top: 150px;
+    }
+  
+    h1 {
+      font-weight: bold;
+      margin-bottom: .65rem;
+    }
+    p {
+      margin-bottom: .65rem;
+    }
+    
+    span {
+      border-bottom: 3px solid $color-red;
+    }
+}
+
+.project-hero {
+    background-size: cover !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    position: relative;
+    margin-top: 29px;
+    width: 100vw;
+    height: 46vw;
+    max-height: 74vh;
+  
+  
+  
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba($color-darkblue, 0.3) 0%,
+        rgba($color-darkblue, 1) 100%
+      );
+      content: "";
+      display: block;
+      z-index: 1;
+  
+      @media #{$bp-tablet-up} {
+        background: linear-gradient(
+          to bottom,
+          rgba($color-darkblue, 0) 30%,
+          rgba($color-darkblue, 1) 100%
+        );
+        opacity: 1;
+      }
+  
+      // NEW MOBILE FRIENDLY RULES
+      @media #{$bp-below-mobile} {
+        background: linear-gradient(to bottom, rgba(3,13,45,0.3) 30%, #030d2d 100%);
+      }
+    }
+}

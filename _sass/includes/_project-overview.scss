@@ -1,0 +1,54 @@
+.description-grid-item {
+    padding: 0px 10px;
+}
+
+.meetingTime {
+    padding-bottom: 1rem;
+}
+
+#project-description-card {
+    padding-bottom: 19px;
+}
+
+.project-page-description {
+    display: grid;
+    grid-template-columns: 40% auto;
+    grid-template-rows: auto;
+    padding: 0px 2%;
+  
+    // NEW MOBILE FRIENDLY RULES
+    @media #{$bp-below-mobile} {
+      display: grid;
+      grid-template-columns: auto;
+      grid-template-rows: auto auto;
+    }
+}
+
+.project-page-description-field {
+    display: inline-block;
+}
+
+.project-page-status-indicator {
+    display:inline-block; 
+    float:none;
+}
+
+.status-Active {
+    background-color: rgb(187, 255, 187);
+}
+
+.status-indicator {
+    float: right;
+    text-align: center;
+    margin-left: 10px;
+    background-color: rgb(255, 255, 151);
+    width: 92px;
+    padding: 2px 7px;
+    border-radius: 6px;
+    box-shadow: 0 0 8px 0 rgba($color-black, 0.1);
+}
+
+.status-text {
+    margin: 0px 0px;
+}
+

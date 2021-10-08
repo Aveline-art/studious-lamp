@@ -1,0 +1,36 @@
+.contributor-div {
+    box-shadow: 0 0 8px 0 rgba(51,51,51,0.2);
+    border-radius: 16px;
+    margin: 13px 30px 13px 0px;
+    width: 94px;
+    padding: 12px;
+    flex-shrink: 0;
+  
+    @media #{$bp-below-mobile} {
+      margin: 0px 10px 26px 0px;
+    }
+}
+
+.contributor-img {
+    border-radius: 12px;
+  }
+
+.contributor-link {
+    margin: 12px 24px 12px 0px;
+    width: 70px;
+    min-width: 70px;
+    border-radius: 12px;
+}
+
+.resource-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 21px;
+  
+    // NEW MOBILE FRIENDLY RULES
+    @media #{$bp-below-mobile} {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 0px;
+    }
+}
