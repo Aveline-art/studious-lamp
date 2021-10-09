@@ -1,0 +1,262 @@
+.btn--donate-header { 
+    margin: -10px 20px 0 0;
+}
+
+.header-nav {
+    position: fixed;
+    left: 0;
+    right:0;
+    bottom: 0;
+    background: $color-white;
+    box-shadow: 0 -1px 0 0 rgba($color-black, 0.12);
+    padding: 10px 0;
+  
+    ul {
+      display: flex;
+    }
+  
+    li {
+      margin: 0;
+      text-align: center;
+      width: 25%;
+    }
+  
+    a {
+      text-decoration: none;
+  
+      &:link,
+      &:visited {
+        color: $color-black;
+      }
+  
+      &:hover,
+      &:active,
+      &:focus {
+        color: $color-red;
+      }
+    }
+  
+    @media #{$bp-below-tablet} {
+      font-size: #{map-get($font-size-small, mobile)};
+      line-height: #{map-get($line-height-small, mobile)};
+      text-transform: uppercase;
+    }
+  
+    @media #{$bp-tablet-up} {
+      background: none;
+      box-shadow: none;
+      flex-grow: 1;
+      padding: 0 0 0 80px;
+      position: static;
+  
+      ul {
+        margin-right: 20px;
+      }
+  
+      li {
+        margin-left: 2em;
+        width: auto;
+      }
+    }
+}
+
+.inline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    display: inline-block;
+    margin-right: 15px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.main-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: $color-white;
+    box-shadow: 0 1px 4px 0 rgba($color-black, 0.12);
+    font-weight: map-get($font-weight, bold);
+    padding: 20px;
+    padding-bottom: 10px;
+    z-index: 100;
+  
+    @media #{$bp-tablet-up} {
+      @include clearfix;
+      padding: 20px 10px 10px 10px;
+      padding-top: 20px;
+      position: fixed;
+  
+      .header-links {
+        flex-grow: 0;
+      }
+    }
+  
+    .header-links {
+      flex-grow: 1;
+      text-align: right;
+  
+      li {
+        margin-right: 20px;
+  
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+  
+      a {
+        &:link,
+        &:visited {
+          color: $color-black;
+          margin: -4px;
+        }
+  
+        &:hover,
+        &:active,
+        &:focus {
+          color: $color-red;
+        }
+      }
+    }
+  
+    .branding {
+      position: absolute;
+      top: -24px;
+      left: -20px;
+  
+      @media #{$bp-tablet-up} {
+        height: 150px;
+        width: 150px;
+      }
+    }
+  
+    .main-header-content {
+      display: flex;
+    }
+}
+
+.main-header-content {
+    display: flex;
+}
+
+@media only screen and (max-width: 1028px) {
+
+    // style the HfLA logo for tablet and mobile
+    // It's not one of the standard numbers because
+    // this is where the text started to get covered up
+    // by the logo
+    .main-header .branding {
+      position: absolute;
+      top: -13px;
+      left: -18px;
+      height: 50px;
+      width: 95px;
+    }
+}
+
+// This styles the hamburger nav and menus on mobile
+@media #{$bp-below-tablet} {
+    #burgerImage { 
+      display: block;
+      height: 25px;
+      width: 25px;
+      border: none;
+      padding-right: 41px;
+      padding-top: 5px;
+    } 
+  
+    #burgerImageX { 
+      display: none; 
+      height: 25px;
+      width: 25px;
+      border: none;
+      padding-right: 41px;
+      padding-top: 5px;
+    }
+  
+    // Sets the initial state of the menu so that it is not showing. 
+    #headerNav {
+      display: none;
+    }
+  
+    // Hide the nav icons
+    .nav-icon {
+      display: none;
+    }  
+  
+    // This is the position of the white box of the menu
+    .header-nav {
+      position: absolute;
+      top: 53px;
+      bottom: auto;
+      height: auto;
+      width: auto;
+      z-index: -1;
+      padding: 18px 71px;
+    }
+  
+    //Menu is top to bottom instead of side to side
+    .header-nav ul {
+      flex-direction: column;
+    }
+  
+    // menu links
+    .header-nav li {
+      padding: 6px;
+      text-align: left;
+      width: 100%;
+      font-weight: 500;
+      text-transform: none;
+      font-size: 16px;
+    }
+  
+    // Underlines the active link
+    .header-nav li a {
+      text-decoration: none;
+  
+      &:link,
+      &:visited,
+      &:hover,
+      &:active,
+      &:focus {
+        color: $color-black;
+      }
+  
+      &:active {
+        text-decoration: underline;
+      }
+    }
+}
+
+@media #{$bp-below-tablet} {
+    // HFLA logo setting for mobile
+    .main-header {
+      position: fixed;
+      padding: 7px;
+    }
+  
+    // Make the donate button smaller for mobile
+    .btn--donate-header {
+      padding: 5px 25px;
+      font-size: .75rem;
+      font-weight: 500;
+      height: 30px;
+      margin-top: 6px;
+      line-height: 0;
+    }
+}
+
+/* Hamburger nav CSS */
+
+// On larger displays the hamburger nav doesn't show.
+@media #{$bp-tablet-up} {
+    #swapButton {
+      display: none;
+    }
+}  
