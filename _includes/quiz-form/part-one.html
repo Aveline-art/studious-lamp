@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-4 mb-3" id="new-or-existing">
+        <label class="form-label">Is this a new or existing project?</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="new-or-existing" value="true" checked>
+            <label class="form-check-label" for="new-project">
+                new
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="new-or-existing" value="false">
+            <label class="form-check-label" for="existing-project">
+                existing
+            </label>
+        </div>
+    </div>
+
+    <div class="col-4 mb-3" id="new-input" hidden>
+        <label class="form-label" for="project-name">What is the project's name:</label>
+        <input type="text" class="form-control" id="project-name" placeholder="New project name">
+    </div>
+
+    <div class="col-4 mb-3" id="existing-input" hidden>
+        <label class="form-label" for="project-name">Choose your project:</label>
+        <select class="form-select" id="project-name" name="project-name">
+            <option value="website">Hackforla.org Website</option>
+            <option value="100automations">100 Automations</option>
+            <option value="civictechjobs">Civic Tech Jobs</option>
+            <option value="worlddomination">World Domination</option>
+        </select>
+    </div>
+</div>
+<script type="module" src="./assets/js/part-one.js"></script>
