@@ -12,7 +12,7 @@
 
   @media #{$bp-tablet-up} {
     @include clearfix;
-    padding: 20px 10px 10px 10px;
+    padding: 20px 10px 0px 10px;
     padding-top: 20px;
     position: fixed;
 
@@ -37,7 +37,7 @@
       &:link,
       &:visited {
         color: $color-black;
-        margin: -4px;
+        margin: -10px;
       }
 
       &:hover,
@@ -67,6 +67,8 @@
 
 .main-header-content {
   display: flex;
+  bottom: 10;
+  top: 0;
 }
 
 .btn--donate-header { 

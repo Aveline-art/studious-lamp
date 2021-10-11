@@ -1,5 +1,9 @@
 <nav>
-  {% for item in site.data.navigation %}
-    <a href="{{ item.link | relative_url }}" {% if page.url == item.link %}class="current"{% endif %}>{{ item.name }}</a>
-  {% endfor %}
+  <ul class="nav nav-pills justify-content-center">
+    {% for item in site.data.navigation %}
+    <li class="nav-item">
+      <a class="nav-link{% if page.url == item.link %} active{% endif %}" aria-current="page" href="{{ item.link | relative_url }}">{{ item.name }}</a>
+    </li>
+    {% endfor %}
+  </ul>
 </nav>
