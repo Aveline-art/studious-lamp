@@ -1,5 +1,4 @@
 ---
-# 'identification' is the 9 digit ID for your repo in the GitHub API.
 identification: '241519642'
 title: Civic Tech Index
 description: Our goal of the project is to create a comprehensive, searchable index of all civic tech open source software projects around the world. We have created the framework and an interest list. We are currently working on building out the website and other marketing tools that demonstrate the power of the index.

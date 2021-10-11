@@ -1,5 +1,4 @@
 ---
-# 'identification' is the 9 digit ID for your repo in the GitHub API.
 identification: '330800079'
 title: Access The Data
 description: 'The Access the Data project seeks to identify where data literacy education is most needed and to develop modules to address those areas. The project will produce a website to make accessing those modules and other relevant self teaching content easy to find and use.'
