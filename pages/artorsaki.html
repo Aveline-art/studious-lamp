@@ -1,14 +1,13 @@
 ---
-title: I Ship ArtoriaxSasaki
+permalink: /artorsaki
 ---
-
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    <title>I Ship ArtoriaxSasaki</title>
+    <link rel="stylesheet" href="{{ '/assets/css/artorsaki.css' | relative_url }}">
 
     <!-- Import Roboto font from Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,20 +19,20 @@ title: I Ship ArtoriaxSasaki
     <div id="app">
         {% include header.html %}
         <main role="main" id="content">
-            {% include hero.html %}
+            {% include artorsaki/hero.html %}
 
             <div class="content-section project-home-page">
                 <!--Project Description Card-->
-                {% include project-overview.html %}
+                {% include artorsaki/project-overview.html %}
 
                 <!--Project Resources Card-->
-                {% include resources.html %}
+                {% include artorsaki/resources.html %}
 
                 <!-- Project Team Card -->
                 <div id="project-team-card"
                     class="page-card card-primary page-card-lg page-card--project-description-page">
-                    {% include current-project-team.html %}
-                    {% include all-time-contributors.html %}
+                    {% include artorsaki/current-project-team.html %}
+                    {% include artorsaki/all-time-contributors.html %}
                 </div>
             </div>
         </main>
