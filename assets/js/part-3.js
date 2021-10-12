@@ -51,8 +51,8 @@ function loadXMLDoc() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("leadership-rows").innerHTML =
-                constructInnerHTML(this.responseText, value);
+            //document.getElementById("leadership-rows").innerHTML =
+            //    constructInnerHTML(this.responseText, value);
         }
     };
     xhttp.open("GET", "./assets/html/leadership-rows.html", true);
