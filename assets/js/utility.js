@@ -13,4 +13,14 @@ function createState(init, runner) {
     return new Proxy(init, handler)
 }
 
-export { createState };
+function toogleSeries(seriesId, targetId) {
+    const series = document.getElementById(seriesId);
+    const children = series.children;
+    for (const child of children) {
+        child.setAttribute('hidden', '');
+    }
+    const target = document.getElementById(targetId);
+    target.removeAttribute('hidden');
+}
+
+export { createState, toogleSeries };

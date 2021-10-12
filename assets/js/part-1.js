@@ -1,11 +1,15 @@
 // Imports
-import { createState } from './utility.js';
+import { createState, toogleSeries } from './utility.js';
 
 // Globals
 var global;
+
+// Sets initial state
 var initialState = {
     isNew: true,
 }
+
+// key-val pairs where keys are the state (see initialState), and the vals are the functions to run on state change
 const stateRunner = {
     isNew: (val) => { listenIsNew(val) },
 }
@@ -41,11 +45,11 @@ function loadNewOrExistingInputListener() {
 }
 
 function loadNextButtonListener() {
-    var ele = document.getElementById('next-button');
+    var ele = document.getElementById('next-button-1');
     ele.addEventListener('click', () => {
         storeItems();
-        moveToNextPage();
-    })
+        toogleSeries('form-parts', 'form-part-2');
+    });
 }
 
 ///////////////////////
@@ -79,14 +83,5 @@ function storeItems() {
     localStorage.setItem('projectData', JSON.stringify(projectData));
 }
 
-function moveToNextPage() {
-    const formParts = document.getElementById('form-parts');
-    const children = formParts.children;
-    for (const child of children) {
-        child.setAttribute('hidden', '');
-    }
-    const formPartTwo = document.getElementById('form-part-2');
-    formPartTwo.removeAttribute('hidden');
-}
-
+// Main call
 main()
