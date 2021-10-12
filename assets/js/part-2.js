@@ -1,5 +1,4 @@
 import { createState, toogleSeries } from './utility.js';
-
 // Globals
 var global;
 
@@ -20,7 +19,7 @@ function main() {
 
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
-        loadNextButtonListener()
+        loadNextButtonListener();
     });
 }
 
@@ -51,6 +50,20 @@ function storeItems() {
     projectData.slackURL = document.getElementById('slack-url').value;
     projectData.technologies = document.getElementById('technologies').value.split('\n');
     projectData.tools = document.getElementById('tools').value.split('\n');
+    projectData.programAreas = parseProgramAreas();
+    localStorage.setItem('projectData', JSON.stringify(projectData));
+}
+
+function parseProgramAreas() {
+    const programAreas = document.getElementById('program-areas');
+    const inputs = programAreas.getElementsByTagName('input');
+    var arr = []
+    for (const input of inputs) {
+        if (input.checked) {
+            arr.push(input.value);
+        }
+    }
+    return arr
 }
 
 // Main call

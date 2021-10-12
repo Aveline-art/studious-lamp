@@ -17,6 +17,8 @@ var projectData;
 
 
 function main() {
+    // TODO remove this once testing is done
+    localStorage.clear();
     global = createState(initialState, stateRunner);
     const data = localStorage.getItem('projectData');
     projectData = data ? JSON.parse(data) : {}
