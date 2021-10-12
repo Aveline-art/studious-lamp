@@ -1,99 +1,12 @@
 ---
-layout: default
+layout: project-form
 title: Quiz
 permalink: /quiz
 ---
-<h1>Form</h1>
+{% include quiz-form/part-1.html %}
 
-<form>
-  {% include quiz-form/part-one.html %}
+{% include quiz-form/part-2.html %}
 
-  <div class="row">
-    <div class="col mb-3">
-      <label class="form-label" for="project-description">Project Description</label>
-      <textarea class="form-control" id="project-description" name="project-description" rows="6" cols="100"
-        placeholder="The hackforla.org website is our organization's way of communicating with volunteers, stakeholders, and donors. This project is a good place to start for new volunteers looking to polish their git protocol skills (branches, separation of concerns, etc.). We currently have two development paths&#58; growth (building out new pages and guides) and optimization (taking inventory of our code and design systems) to ensure we are consistently delivering value to our users while being scalable in our approach to building the site."></textarea>
-    </div>
-  </div>
+{% include quiz-form/part-3.html %}
 
-  <div class="row">
-    <div class="col mb-3">
-      <label class="form-label" for="project-image">Upload a project image</label>
-      <input type="file" class="form-control" id="project-image" name="project-image" accept="image/png, image/jpeg">
-    </div>
-
-    <div class="col mb-3">
-      <label class="form-label" for="project-hero">Upload a hero image</label>
-      <input type="file" class="form-control" id="project-hero" name="project-hero" accept="image/png, image/jpeg">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-4 mb-3">
-      <label class="form-label" for="num-leads">Number of leadership members</label>
-      <input type="number" class="form-control" id="num-leads" min="1" max="10">
-    </div>
-
-    <div class="col-8 mb-3">
-      <label class="form-label" for="github-url">What is the GitHub url?</label>
-      <input type="url" class="form-control" name="github-url" id="github-url" placeholder="https://example.com"
-        pattern="https://.*" size="30">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col mb-3">
-      <label class="form-label" for="technologies">List out your project's technologies (use a newline for
-        each):</label>
-      <textarea class="form-control" id="technologies" name="technologies"
-        placeholder="GitHub Pages&#10;Jekyll&#10;Docker" rows="6" cols="50"></textarea>
-    </div>
-
-    <div class="col mb-3">
-      <label class="form-label" for="tools">List out your project's tools (use a newline for each):</label>
-      <textarea class="form-control" id="tools" name="tools"
-        placeholder="Figma&#10;Google Drive&#10;Zoom&#10;Google Analytics" rows="6" cols="50"></textarea>
-    </div>
-
-    <div class="col mb-3">
-      <label class="form-label" for="status">What is the project's status?</label>
-      <select class="form-select" id="status" name="status">
-        <option value="active">Active</option>
-        <option value="inactive">Inactive</option>
-        <option value="finished">Finished</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col mb-3">
-      <label class="form-label">What are the program areas? Pick all that apply.</label>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="scales" id="scales" name="scales">
-        <label class="form-check-label" for="scales">
-          Scales
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="scales" id="horns" name="horns">
-        <label class="form-check-label" for="horns">
-          Horns
-        </label>
-      </div>
-    </div>
-
-    <div class="col">
-      <label class="form-label" for="winner">Who should have won the Fourth Holy Grail War?</label>
-      <select class="form-select" id="winner" name="winner">
-        <option value="iskandar" selected>Iskandar</option>
-        <option value="iskandar">Waver</option>
-        <option value="iskandar">Rider</option>
-        <option value="iskandar">Whoever won 4th place last time</option>
-        <option value="iskandar">Lord El Melloi II</option>
-        <option value="iskandar">Alexander the Great</option>
-        <option value="iskandar">Ionioi Hetairoi because the true Grail is all the friends we made along the way
-        </option>
-      </select>
-    </div>
-  </div>
-</form>
+{% include quiz-form/part-4.html %}
