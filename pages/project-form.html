@@ -1,12 +1,22 @@
 ---
-layout: project-form
+layout: default
 title: Quiz
 permalink: /quiz
 ---
-{% include quiz-form/part-1.html %}
+<div id="form-parts">
+    <form id="form-part-1">
+        {% include quiz-form/part-1.html %}
+    </form>
 
-{% include quiz-form/part-2.html %}
+    <form id="form-part-2" hidden>
+        {% include quiz-form/part-2.html %}
+    </form>
 
-{% include quiz-form/part-3.html %}
+    <form id="form-part-3" hidden>
+        {% include quiz-form/part-3.html %}
+    </form>
 
-{% include quiz-form/part-4.html %}
+    <form id="form-part-4" hidden>
+        {% include quiz-form/part-4.html %}
+    </form>
+</div>

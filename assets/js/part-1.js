@@ -20,8 +20,10 @@ function main() {
 }
 
 function loadListeners() {
-    loadNewOrExistingInputListener()
-    loadNextButtonListener()
+    document.addEventListener("DOMContentLoaded", function () {
+        loadNewOrExistingInputListener()
+        loadNextButtonListener()
+    });
 }
 
 ///////////////////////
@@ -30,7 +32,7 @@ function loadListeners() {
 
 function loadNewOrExistingInputListener() {
     var ele = document.getElementById('new-or-existing');
-    var children = ele.childNodes;
+    var children = ele.children;
     for (const child of children) {
         if (child.className == 'form-check') {
             child.getElementsByTagName('input')[0].addEventListener('click', toogleNew);
@@ -74,13 +76,17 @@ function toogleNew(event) {
 function storeItems() {
     const projectName = document.getElementById('project-name-input').value;
     projectData.projectName = projectName;
+    localStorage.setItem('projectData', JSON.stringify(projectData));
 }
 
 function moveToNextPage() {
-    localStorage.setItem('projectData', JSON.stringify(projectData));
-    const item = localStorage.getItem('projectData');
-    console.log(JSON.parse(item));
-    window.location.href = './about'
+    const formParts = document.getElementById('form-parts');
+    const children = formParts.children;
+    for (const child of children) {
+        child.setAttribute('hidden', '');
+    }
+    const formPartTwo = document.getElementById('form-part-2');
+    formPartTwo.removeAttribute('hidden');
 }
 
 main()
