@@ -15,14 +15,14 @@
         </div>
     </div>
 
-    <div class="col-4 mb-3" id="new-input" hidden>
-        <label class="form-label" for="project-name">What is the project's name:</label>
-        <input type="text" class="form-control" id="project-name" placeholder="New project name">
+    <div class="col-4 mb-3" id="new-input">
+        <label class="form-label" for="project-name-input">What is the project's name:</label>
+        <input type="text" class="form-control" id="project-name-input" placeholder="New project name" value="dummy value">
     </div>
 
     <div class="col-4 mb-3" id="existing-input" hidden>
-        <label class="form-label" for="project-name">Choose your project:</label>
-        <select class="form-select" id="project-name" name="project-name">
+        <label class="form-label" for="project-name-select">Choose your project:</label>
+        <select class="form-select" id="project-name-select" name="project-name-select">
             <option value="website">Hackforla.org Website</option>
             <option value="100automations">100 Automations</option>
             <option value="civictechjobs">Civic Tech Jobs</option>
@@ -30,4 +30,5 @@
         </select>
     </div>
 </div>
+<button type="button" class="btn btn-primary mb-3" id="next-button">Next</button>
 <script type="module" src="./assets/js/part-one.js"></script>

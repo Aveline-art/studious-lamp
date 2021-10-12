@@ -9,14 +9,19 @@ var initialState = {
 const stateRunner = {
     isNew: (val) => { listenIsNew(val) },
 }
+var projectData;
+
 
 function main() {
     global = createState(initialState, stateRunner);
+    const data = localStorage.getItem('projectData');
+    projectData = data ? JSON.parse(data) : {}
     loadListeners();
 }
 
 function loadListeners() {
     loadNewOrExistingInputListener()
+    loadNextButtonListener()
 }
 
 ///////////////////////
@@ -31,6 +36,14 @@ function loadNewOrExistingInputListener() {
             child.getElementsByTagName('input')[0].addEventListener('click', toogleNew);
         }
     }
+}
+
+function loadNextButtonListener() {
+    var ele = document.getElementById('next-button');
+    ele.addEventListener('click', () => {
+        storeItems();
+        moveToNextPage();
+    })
 }
 
 ///////////////////////
@@ -56,6 +69,18 @@ function listenIsNew(val) {
 function toogleNew(event) {
     const eventVal = event.target.value;
     global.isNew = eventVal == 'true';
+}
+
+function storeItems() {
+    const projectName = document.getElementById('project-name-input').value;
+    projectData.projectName = projectName;
+}
+
+function moveToNextPage() {
+    localStorage.setItem('projectData', JSON.stringify(projectData));
+    const item = localStorage.getItem('projectData');
+    console.log(JSON.parse(item));
+    window.location.href = './about'
 }
 
 main()
