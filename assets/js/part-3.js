@@ -20,7 +20,9 @@ function main() {
 
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
-        loadNextButtonListener()
+        loadNextButtonListener();
+        document.getElementById('num-leads').addEventListener('input', loadXMLDoc);
+        loadXMLDoc();
     });
 }
 
@@ -44,7 +46,28 @@ function loadNextButtonListener() {
 /// Other Functions ///
 ///////////////////////
 
-function storeItems() {}
+function loadXMLDoc() {
+    const value = document.getElementById('num-leads').value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("leadership-rows").innerHTML =
+                constructInnerHTML(this.responseText, value);
+        }
+    };
+    xhttp.open("GET", "./assets/html/leadership-rows.html", true);
+    xhttp.send();
+}
+
+function constructInnerHTML(text, num) {
+    var arr = []
+    for (let i = 0; i < num; i++) {
+        arr.push(text.replaceAll('${insertId}', `${i + 1}`));
+    }
+    return arr.join('\n')
+}
+
+function storeItems() { }
 
 // Main call
 main()
