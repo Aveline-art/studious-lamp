@@ -85,52 +85,64 @@ function constructLeadershipRows(rows) {
         leadershipRows.removeChild(leadershipRows.firstChild);
     }
 
-    const inputNode = createDomObject('input', {
-        'type': 'text',
-        'class': 'form-control',
-    });
     for (let i = 0; i < rows; i++) {
         const rowNode = createDomObject('div', {
             'class': 'row mb-1',
             'id': `leader-${i + 1}`,
         })
 
-        const col1 = createDomObject('div', { 'class': 'col-1 text-center' })
-        col1.appendChild(document.createTextNode(`${i + 1}`));
-        const col2 = createDomObject('div', {
-            'class': 'col-4',
+        const col1 = createDomObject('div', { 'class': 'col-1 text-center' });
+        const child1 = document.createTextNode(`${i + 1}`);
+        col1.appendChild(child1);
+
+        const col2 = createDomObject('div', { 'class': 'col-4' });
+        const child2 = createDomObject('input', {
+            'type': 'text',
+            'class': 'form-control',
             'name': 'leader-name',
-        })
-        col2.append(inputNode.cloneNode());
-        const col3 = createDomObject('div', {
-            'class': 'col-3',
+        });
+        col2.append(child2);
+
+        const col3 = createDomObject('div', { 'class': 'col-3' });
+        const child3 = createDomObject('input', {
+            'type': 'text',
+            'class': 'form-control',
             'name': 'leader-role',
-        })
-        col3.append(inputNode.cloneNode());
-        const col4 = createDomObject('div', {
-            'class': 'col-4',
+        });
+        col3.append(child3);
+
+        const col4 = createDomObject('div', { 'class': 'col-4' });
+        const child4 = createDomObject('input', {
+            'type': 'text',
+            'class': 'form-control',
             'name': 'leader-github',
-        })
-        col4.append(inputNode.cloneNode());
+        });
+        col4.append(child4);
 
         rowNode.append(col1, col2, col3, col4);
-
         leadershipRows.append(rowNode);
     }
 }
 
 function storeItems() {
+    projectData.projectLeaders = gatherLeaders();
+    localStorage.setItem('projectData', JSON.stringify(projectData));
+}
+
+function gatherLeaders() {
     var ele = document.getElementById('leadership-rows');
-    var children = ele.childNodes
+    var children = ele.childNodes;
+    var leaders = []
     for (const child of children) {
-        /*
-        Check for all children
-        if child is an input
-        register the name of the input value
-        take the input value and place it in a dict with the input name
-        */
-        console.log(child);
+        var leader = {}
+
+        const inputs = child.getElementsByTagName('input');
+        for (const input of inputs) {
+            leader[input.name] = input.value;
+        }
+        leaders.push(leader);
     }
+    return leaders
 }
 
 // Main call
