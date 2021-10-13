@@ -25,6 +25,7 @@ function main() {
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
         loadNextButtonListener();
+        loadBackButtonListener();
         loadNumLeadsInputListener();
         constructLeadershipRows(global.rows);
     });
@@ -44,6 +45,14 @@ function loadNextButtonListener() {
     ele.addEventListener('click', () => {
         storeItems();
         toogleSeries('form-parts', 'form-part-4');
+    });
+}
+
+function loadBackButtonListener() {
+    var ele = document.getElementById('back-button-3');
+    ele.addEventListener('click', () => {
+        storeItems();
+        toogleSeries('form-parts', 'form-part-2');
     });
 }
 
@@ -86,13 +95,22 @@ function constructLeadershipRows(rows) {
             'id': `leader-${i + 1}`,
         })
 
-        const col1 = createDomObject('div', { 'class': 'col-1' })
+        const col1 = createDomObject('div', { 'class': 'col-1 text-center' })
         col1.appendChild(document.createTextNode(`${i + 1}`));
-        const col2 = createDomObject('div', { 'class': 'col-4' })
+        const col2 = createDomObject('div', {
+            'class': 'col-4',
+            'name': 'leader-name',
+        })
         col2.append(inputNode.cloneNode());
-        const col3 = createDomObject('div', { 'class': 'col-3' })
+        const col3 = createDomObject('div', {
+            'class': 'col-3',
+            'name': 'leader-role',
+        })
         col3.append(inputNode.cloneNode());
-        const col4 = createDomObject('div', { 'class': 'col-4' })
+        const col4 = createDomObject('div', {
+            'class': 'col-4',
+            'name': 'leader-github',
+        })
         col4.append(inputNode.cloneNode());
 
         rowNode.append(col1, col2, col3, col4);
@@ -101,7 +119,19 @@ function constructLeadershipRows(rows) {
     }
 }
 
-function storeItems() { }
+function storeItems() {
+    var ele = document.getElementById('leadership-rows');
+    var children = ele.childNodes
+    for (const child of children) {
+        /*
+        Check for all children
+        if child is an input
+        register the name of the input value
+        take the input value and place it in a dict with the input name
+        */
+        console.log(child);
+    }
+}
 
 // Main call
 main()

@@ -20,6 +20,7 @@ function main() {
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
         loadNextButtonListener();
+        loadBackButtonListener();
     });
 }
 
@@ -32,6 +33,14 @@ function loadNextButtonListener() {
     ele.addEventListener('click', () => {
         storeItems();
         toogleSeries('form-parts', 'form-part-3');
+    });
+}
+
+function loadBackButtonListener() {
+    var ele = document.getElementById('back-button-2');
+    ele.addEventListener('click', () => {
+        storeItems();
+        toogleSeries('form-parts', 'form-part-1');
     });
 }
 
