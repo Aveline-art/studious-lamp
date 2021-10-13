@@ -13,7 +13,6 @@ const stateRunner = {
     rows: (rows) => { listenRows(rows) }
 }
 
-
 function main() {
     global = createState(initialState, stateRunner);
     loadListeners();

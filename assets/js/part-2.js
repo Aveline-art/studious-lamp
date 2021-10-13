@@ -3,10 +3,14 @@ import { createState, toogleSeries } from './utility.js';
 var global;
 
 // Sets initial state
-var initialState = {}
+var initialState = {
+    isNew: true,
+}
 
-// key-val pairs where keys are the state (see initialState), and the vals are the functions to run on state change
-const stateRunner = {}
+// key-val pairs where keys are the state (see initialState), and the vals is the function to run on state change
+const stateRunner = {
+    isNew: (isNew) => { listenIsNew(isNew) },
+}
 
 function main() {
     global = createState(initialState, stateRunner);
@@ -19,6 +23,7 @@ function loadListeners() {
         loadBackButtonListener();
     });
 }
+
 
 ///////////////////////
 /// Event Listeners ///
@@ -40,9 +45,25 @@ function loadBackButtonListener() {
     });
 }
 
+
+/////////////////////
+/// State Setters ///
+/////////////////////
+
+function setIsNewExport(val) {
+    global.isNew = val;
+}
+
+
 ///////////////////////
 /// State Listeners ///
 ///////////////////////
+
+function listenIsNew(val) {
+    console.log('comming in from part2')
+    console.log(val)
+}
+
 
 ///////////////////////
 /// Other Functions ///
@@ -76,3 +97,5 @@ function parseProgramAreas() {
 
 // Main call
 main()
+
+export { setIsNewExport };

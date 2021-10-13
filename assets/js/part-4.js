@@ -7,8 +7,10 @@ var global;
 var initialState = {}
 
 // key-val pairs where keys are the state (see initialState), and the vals are the functions to run on state change
-const stateRunner = {}
-
+const stateRunner = {
+    projectImage: (projectImage) => listenProjectImage(projectImage),
+    projectHero: (projectHero) => listenProjectHero(projectHero),
+}
 
 function main() {
     global = createState(initialState, stateRunner);
@@ -22,6 +24,7 @@ function loadListeners() {
         loadHeroUploadListener();
     });
 }
+
 
 ///////////////////////
 /// Event Listeners ///
@@ -37,49 +40,54 @@ function loadBackButtonListener() {
 
 function loadImageUploadListener() {
     const ele = document.getElementById('project-image');
-    ele.addEventListener('change', getProjectImage, false);
+    ele.addEventListener('change', setProjectImage, false);
 }
 
 function loadHeroUploadListener() {
     const ele = document.getElementById('project-hero');
-    ele.addEventListener('change', getHeroImage, false);
+    ele.addEventListener('change', setHeroImage, false);
 }
+
 
 /////////////////////
 /// State Setters ///
 /////////////////////
+
+function setProjectImage() {
+    const fileList = this.files
+    global.projectImage = fileList[0]
+}
+
+function setHeroImage() {
+    const fileList = this.files
+    global.projectHero = fileList[0]
+}
 
 
 ///////////////////////
 /// State Listeners ///
 ///////////////////////
 
+function listenProjectImage(image) {
+    const ele = document.getElementById('project-image-preview')
+    ele.file = image
+    const reader = new FileReader();
+    reader.onload = (function (aImg) { return function (e) { aImg.src = e.target.result; }; })(ele);
+    reader.readAsDataURL(image);
+}
+
+function listenProjectHero(image) {
+    const ele = document.getElementById('project-hero-preview');
+    ele.file = image
+    const reader = new FileReader();
+    reader.onload = (function (aImg) { return function (e) { aImg.src = e.target.result; }; })(ele);
+    reader.readAsDataURL(image);
+}
+
 
 ///////////////////////
 /// Other Functions ///
 ///////////////////////
-
-
-// TODO the file is the state
-function getProjectImage() {
-    const fileList = this.files
-    const ele = document.getElementById('project-image-preview')
-    ele.file = fileList[0]
-
-    const reader = new FileReader();
-    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(ele);
-    reader.readAsDataURL(fileList[0]);
-}
-
-function getHeroImage() {
-    const fileList = this.files
-    const ele = document.getElementById('project-hero-preview');
-    ele.file = fileList[0]
-
-    const reader = new FileReader();
-    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(ele);
-    reader.readAsDataURL(fileList[0]);
-}
 
 function storeItems() {
     const data = localStorage.getItem('projectData');

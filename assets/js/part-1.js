@@ -1,5 +1,6 @@
 // Imports
 import { createState, toogleSeries } from './utility.js';
+import { setIsNewExport } from './part-2.js';
 
 // Globals
 var global;
@@ -38,7 +39,7 @@ function loadNewOrExistingInputListener() {
     const children = ele.children;
     for (const child of children) {
         if (child.className == 'form-check') {
-            child.getElementsByTagName('input')[0].addEventListener('click', setNew);
+            child.getElementsByTagName('input')[0].addEventListener('click', setIsNew);
         }
     }
 }
@@ -55,9 +56,10 @@ function loadNextButtonListener() {
 /// State Setters ///
 /////////////////////
 
-function setNew(event) {
+function setIsNew(event) {
     const eventVal = event.target.value;
     global.isNew = eventVal == 'true';
+    setIsNewExport(global.isNew);
 }
 
 ///////////////////////
