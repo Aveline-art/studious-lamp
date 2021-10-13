@@ -1,6 +1,7 @@
-const data = localStorage.getItem('projectData');
-const info = JSON.parse(data);
+const data = JSON.parse(localStorage.getItem('projectData'));
 
-console.log('iamhere')
+console.log(data)
 
-console.log(info)
+document.getElementById('projectName').innerText = data.projectName
+const hero = document.getElementById('heroImage').setAttribute('style', `
+background-image: url(${data.projectHero});`)

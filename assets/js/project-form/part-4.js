@@ -68,11 +68,12 @@ function setHeroImage() {
 /// State Listeners ///
 ///////////////////////
 
+// Figure out how to cache the image promise here instead of below
 function listenProjectImage(image) {
     const ele = document.getElementById('project-image-preview')
     ele.file = image
     const reader = new FileReader();
-    reader.onload = (function (aImg) { return function (e) { aImg.src = e.target.result; }; })(ele);
+    reader.onload = (function (ele) { return function (e) { ele.src = e.target.result; }; })(ele);
     reader.readAsDataURL(image);
 }
 
@@ -93,9 +94,28 @@ function storeItems() {
     const data = localStorage.getItem('projectData');
     var projectData = data ? JSON.parse(data) : {}
 
-    projectData.projectImage = document.getElementById('project-image-preview').file
-    projectData.projectHero = document.getElementById('project-hero-preview').file
-    localStorage.setItem('projectData', JSON.stringify(projectData));
+    const promise1 = getImageURL(global.projectImage)
+    const promise2 = getImageURL(global.projectHero)
+
+    Promise.all([promise1, promise2]).then((data) => {
+        projectData.projectImage = data[0]
+        projectData.projectHero = data[1]
+        localStorage.setItem('projectData', JSON.stringify(projectData));
+    });
+}
+
+function getImageURL(image) {
+    return new Promise(function (resolve, reject) {
+        try {
+            var reader = new FileReader();
+            reader.onload = function () { resolve(reader.result); };
+            reader.onerror = reject;
+            reader.readAsDataURL(image);
+        }
+        catch {
+            resolve('');
+        }
+    });
 }
 
 
