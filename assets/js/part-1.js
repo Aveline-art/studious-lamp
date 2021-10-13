@@ -13,15 +13,12 @@ var initialState = {
 const stateRunner = {
     isNew: (val) => { listenIsNew(val) },
 }
-var projectData;
 
 
 function main() {
     // TODO remove this once testing is done
     localStorage.clear();
     global = createState(initialState, stateRunner);
-    const data = localStorage.getItem('projectData');
-    projectData = data ? JSON.parse(data) : {}
     loadListeners();
 }
 
@@ -84,6 +81,9 @@ function listenIsNew(val) {
 ///////////////////////
 
 function storeItems() {
+    const data = localStorage.getItem('projectData');
+    var projectData = data ? JSON.parse(data) : {}
+
     const projectName = document.getElementById('project-name-input').value;
     projectData.projectName = projectName;
     localStorage.setItem('projectData', JSON.stringify(projectData));

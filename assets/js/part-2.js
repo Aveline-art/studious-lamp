@@ -7,13 +7,10 @@ var initialState = {}
 
 // key-val pairs where keys are the state (see initialState), and the vals are the functions to run on state change
 const stateRunner = {}
-var projectData;
 
 
 function main() {
     global = createState(initialState, stateRunner);
-    const data = localStorage.getItem('projectData');
-    projectData = data ? JSON.parse(data) : {}
     loadListeners();
 }
 
@@ -53,6 +50,9 @@ function loadBackButtonListener() {
 ///////////////////////
 
 function storeItems() {
+    const data = localStorage.getItem('projectData');
+    var projectData = data ? JSON.parse(data) : {}
+
     projectData.projectStatus = document.getElementById('project-status').value;
     projectData.projectDescription = document.getElementById('project-status').value;
     projectData.githubURL = document.getElementById('github-url').value;

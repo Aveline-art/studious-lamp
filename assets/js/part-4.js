@@ -51,7 +51,12 @@ function loadBackButtonListener() {
 /// Other Functions ///
 ///////////////////////
 
-function storeItems() {}
+function storeItems() {
+    const data = localStorage.getItem('projectData');
+    var projectData = data ? JSON.parse(data) : {}
+
+    console.log(projectData)
+}
 
 
 // main call
