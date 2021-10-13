@@ -1,4 +1,4 @@
-import { createState, toogleSeries } from './utility.js';
+import { createState, toogleSeries } from '../utility.js';
 // Globals
 var global;
 

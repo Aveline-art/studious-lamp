@@ -1,5 +1,5 @@
 // Imports
-import { createState, toogleSeries } from './utility.js';
+import { createState, toogleSeries } from '../utility.js';
 import { setIsNewExport } from './part-2.js';
 
 // Globals

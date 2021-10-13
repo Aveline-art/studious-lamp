@@ -1,4 +1,4 @@
-import { createState, toogleSeries, createDomObject } from './utility.js';
+import { createState, toogleSeries, createDomObject } from '../utility.js';
 
 // Globals
 var global;
