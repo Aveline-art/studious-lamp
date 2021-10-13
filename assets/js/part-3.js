@@ -10,7 +10,7 @@ var initialState = {
 
 // key-val pairs where keys are the state (see initialState), and the vals are the functions to run on state change
 const stateRunner = {
-    rows: (num) => { listenRows(num) }
+    rows: (rows) => { listenRows(rows) }
 }
 
 
@@ -33,12 +33,12 @@ function loadListeners() {
 ///////////////////////
 
 function loadNumLeadsInputListener() {
-    var ele = document.getElementById('num-leads')
+    const ele = document.getElementById('num-leads')
     ele.addEventListener('input', setRows);
 }
 
 function loadNextButtonListener() {
-    var ele = document.getElementById('next-button-3');
+    const ele = document.getElementById('next-button-3');
     ele.addEventListener('click', () => {
         storeItems();
         toogleSeries('form-parts', 'form-part-4');
