@@ -41,7 +41,7 @@ function loadNewOrExistingInputListener() {
     var children = ele.children;
     for (const child of children) {
         if (child.className == 'form-check') {
-            child.getElementsByTagName('input')[0].addEventListener('click', toogleNew);
+            child.getElementsByTagName('input')[0].addEventListener('click', setNew);
         }
     }
 }
@@ -52,6 +52,15 @@ function loadNextButtonListener() {
         storeItems();
         toogleSeries('form-parts', 'form-part-2');
     });
+}
+
+/////////////////////
+/// State Setters ///
+/////////////////////
+
+function setNew(event) {
+    const eventVal = event.target.value;
+    global.isNew = eventVal == 'true';
 }
 
 ///////////////////////
@@ -73,11 +82,6 @@ function listenIsNew(val) {
 ///////////////////////
 /// Other Functions ///
 ///////////////////////
-
-function toogleNew(event) {
-    const eventVal = event.target.value;
-    global.isNew = eventVal == 'true';
-}
 
 function storeItems() {
     const projectName = document.getElementById('project-name-input').value;

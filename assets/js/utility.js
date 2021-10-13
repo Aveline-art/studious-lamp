@@ -23,4 +23,12 @@ function toogleSeries(seriesId, targetId) {
     target.removeAttribute('hidden');
 }
 
-export { createState, toogleSeries };
+function createDomObject(tag, attributes) {
+    const item = document.createElement(tag);
+    for (const prop in attributes) {
+        item.setAttribute(prop, attributes[prop]);
+    }
+    return item
+}
+
+export { createState, toogleSeries, createDomObject };
