@@ -60,6 +60,7 @@ function setIsNewExport(val) {
 ///////////////////////
 
 function listenIsNew(val) {
+    // Test to see if export state setting is possible
     console.log('comming in from part2')
     console.log(val)
 }
@@ -77,8 +78,11 @@ function storeItems() {
     projectData.projectDescription = document.getElementById('project-description').value;
     projectData.githubURL = document.getElementById('github-url').value;
     projectData.slackURL = document.getElementById('slack-url').value;
+    projectData.websiteURL = document.getElementById('website-url').value;
+    projectData.wikiURL = document.getElementById('wiki-url').value;
     projectData.technologies = document.getElementById('technologies').value.split('\n');
     projectData.tools = document.getElementById('tools').value.split('\n');
+    projectData.locations = document.getElementById('locations').value.split('\n')
     projectData.programAreas = parseProgramAreas();
     localStorage.setItem('projectData', JSON.stringify(projectData));
 }
