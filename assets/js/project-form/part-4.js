@@ -20,6 +20,7 @@ function main() {
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
         loadBackButtonListener();
+        loadSubmitButtonListener()
         loadImageUploadListener();
         loadHeroUploadListener();
     });
@@ -36,6 +37,13 @@ function loadBackButtonListener() {
         storeItems();
         toogleSeries('form-parts', 'form-part-3');
     });
+}
+
+function loadSubmitButtonListener() {
+    const ele = document.getElementById('submit-button');
+    ele.addEventListener('click', () => {
+        storeItems();
+    })
 }
 
 function loadImageUploadListener() {
