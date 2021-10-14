@@ -102,10 +102,10 @@ function storeItems() {
     const data = localStorage.getItem('projectData');
     var projectData = data ? JSON.parse(data) : {}
 
-    const promise1 = getImageURL(global.projectImage)
-    const promise2 = getImageURL(global.projectHero)
+    const imagePromise = getImageURL(global.projectImage)
+    const heroPromise = getImageURL(global.projectHero)
 
-    Promise.all([promise1, promise2]).then((data) => {
+    Promise.all([imagePromise, heroPromise]).then((data) => {
         projectData.projectImage = data[0]
         projectData.projectHero = data[1]
         localStorage.setItem('projectData', JSON.stringify(projectData));
@@ -116,7 +116,7 @@ function getImageURL(image) {
     return new Promise(function (resolve, reject) {
         try {
             var reader = new FileReader();
-            reader.onload = function () { resolve(reader.result); };
+            reader.onload = () => resolve(reader.result);
             reader.onerror = reject;
             reader.readAsDataURL(image);
         }

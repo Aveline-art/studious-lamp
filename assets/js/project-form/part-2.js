@@ -84,7 +84,11 @@ function storeItems() {
     projectData.tools = document.getElementById('tools').value.split('\n');
     projectData.locations = document.getElementById('locations').value.split('\n')
     projectData.programAreas = parseProgramAreas();
-    localStorage.setItem('projectData', JSON.stringify(projectData));
+
+    getGitHubRepoId(projectData.githubURL).then((data) => {
+        projectData.identification = data.id
+        localStorage.setItem('projectData', JSON.stringify(projectData));
+    });
 }
 
 function parseProgramAreas() {
@@ -97,6 +101,25 @@ function parseProgramAreas() {
         }
     }
     return arr
+}
+
+function getGitHubRepoId(link) {
+
+    return new Promise((resolve) => {
+        try {
+            const [owner, repo] = parseGitHubURL(link)
+            fetch(`https://api.github.com/repos/${owner}/${repo}`).then(response => response.json())
+        }
+        catch {
+            resolve('')
+        }
+    });
+}
+
+function parseGitHubURL(link) {
+    const regexp = /github.com\/(.*)\/(.*)/i
+    const results = link.match(regexp);
+    return [results[1], results[2]]
 }
 
 // Main call
