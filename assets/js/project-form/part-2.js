@@ -89,6 +89,8 @@ function storeItems() {
         projectData.identification = data.id
         localStorage.setItem('projectData', JSON.stringify(projectData));
     });
+
+    // second promise for repo languages
 }
 
 function parseProgramAreas() {
@@ -108,7 +110,7 @@ function getGitHubRepoId(link) {
     return new Promise((resolve) => {
         try {
             const [owner, repo] = parseGitHubURL(link)
-            fetch(`https://api.github.com/repos/${owner}/${repo}`).then(response => response.json())
+            fetch(`https://api.github.com/repos/${owner}/${repo}`).then(response => resolve(response.json()))
         }
         catch {
             resolve('')
