@@ -95,7 +95,7 @@ function constructLeadershipRows(rows) {
         const child2 = createDomObject('input', {
             'type': 'text',
             'class': 'form-control',
-            'name': 'leader-name',
+            'name': 'leaderName',
         });
         col2.append(child2);
 
@@ -103,7 +103,7 @@ function constructLeadershipRows(rows) {
         const child3 = createDomObject('input', {
             'type': 'text',
             'class': 'form-control',
-            'name': 'leader-role',
+            'name': 'leaderRole',
         });
         col3.append(child3);
 
@@ -111,7 +111,7 @@ function constructLeadershipRows(rows) {
         const child4 = createDomObject('input', {
             'type': 'text',
             'class': 'form-control',
-            'name': 'leader-github',
+            'name': 'leaderGithub',
         });
         col4.append(child4);
 
