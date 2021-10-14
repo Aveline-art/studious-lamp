@@ -33,7 +33,7 @@ function linkCreator(ele, ...args) {
                 'target': '_blank',
                 'href': item.link,
             })
-            linkNode.innerText = `${item.text}`
+            linkNode.innerText = `${item.name}`
             ele.append(linkNode, document.createTextNode(", "))
         }
     }

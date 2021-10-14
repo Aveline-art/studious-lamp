@@ -77,19 +77,19 @@ function storeItems() {
     projectData.projectStatus = document.getElementById('project-status').value;
     projectData.projectDescription = document.getElementById('project-description').value;
     projectData.githubURL = {
-        text: 'Github',
+        name: 'Github',
         link: document.getElementById('github-url').value,
     };
     projectData.slackURL = {
-        text: 'Slack',
+        name: 'Slack',
         link: document.getElementById('slack-url').value,
     };
     projectData.websiteURL = {
-        text: 'Website',
+        name: 'Website',
         link: document.getElementById('website-url').value,
     };
     projectData.wikiURL = {
-        text: 'Wiki',
+        name: 'Wiki',
         link: document.getElementById('wiki-url').value,
     };
     projectData.technologies = document.getElementById('technologies').value.split('\n');
