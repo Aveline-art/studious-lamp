@@ -87,7 +87,7 @@ function constructLeadershipRows(rows) {
             'id': `leader-${i + 1}`,
         })
 
-        const col1 = createDomObject('div', { 'class': 'col-1 text-center' });
+        const col1 = createDomObject('div', { 'class': 'col-1' });
         const child1 = document.createTextNode(`${i + 1}`);
         col1.appendChild(child1);
 

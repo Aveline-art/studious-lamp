@@ -3,7 +3,7 @@ layout: default
 title: About
 permalink: /about
 ---
-# About page
+# About
 
 studious-lamp is a proof-of-concept for a form that supports the [Hackforla.org Website](https://www.hackforla.org/projects/website) project. At Hack For LA, we use the static website generator, Jekyll to render the website. In lieu of a traditional database, Jekyll places data inside a _data directory using .yml files struture the data. Therefore, when a new project needs to be showcased on the [projects page](https://www.hackforla.org/projects/), the data concerning the project needs to be formatted in a .yml file.
 
@@ -17,6 +17,6 @@ The goal of this proof-of-concept is to streamline the process by:
 
 This website is built on Jekyll, with the help of Bootstrap for styling. This choice of technology reflects the technology used on the website project. Indeed, I believe that, should this proof-of-concept is accepted, it will live as a part of the website project's development website. It will provide an easily accessible space for project managers to update their project's data. At the same time, the website project will be the maintainer of this code, should its format ever needs to be changed.
 
-### Artorsaki
+### Why Artorsaki?
 
 Why is the form called Artorsaki? There is no special reason. The meaning behind the name is a portmanteau of two characters from the nonsensically-named anime, [Fate/Stay Night: Unlimited Blade Works](https://en.wikipedia.org/wiki/Fate/stay_night:_Unlimited_Blade_Works_(TV_series)). Specifically, the characters are *Artoria Pendragon*, a female version of King Arthur, and *Sasaki Kojirou*, a legendary Japanese swordsman. These two characters had a grand total two scenes together in the entire 25 episode series. Nevertheless, the creator of this website was completely enamoured with their openly flirtations with one another. Like all anime fangirls, the appropriate way to speak of two characters as a couple is to combine their names. Hence, Artorsaki is born.
