@@ -1,3 +1,4 @@
+// TODO turn this into a class, that way it can be used in a central state handler
 function createState(init, runner) {
     const handler = {
         get: function (obj, prop) {
