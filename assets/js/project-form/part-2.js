@@ -1,19 +1,8 @@
-import { createState, toogleSeries } from '../utility.js';
-// Globals
-var global;
+import { toogleSeries } from '../utility.js';
+import { global } from './state.js';
 
-// Sets initial state
-var initialState = {
-    isNew: true,
-}
-
-// key-val pairs where keys are the state (see initialState), and the vals is the function to run on state change
-const stateRunner = {
-    isNew: (isNew) => { listenIsNew(isNew) },
-}
 
 function main() {
-    global = createState(initialState, stateRunner);
     loadListeners();
 }
 
@@ -50,20 +39,10 @@ function loadBackButtonListener() {
 /// State Setters ///
 /////////////////////
 
-function setIsNewExport(val) {
-    global.isNew = val;
-}
-
 
 ///////////////////////
 /// State Listeners ///
 ///////////////////////
-
-function listenIsNew(val) {
-    // Test to see if export state setting is possible
-    console.log('comming in from part2')
-    console.log(val)
-}
 
 
 ///////////////////////
@@ -138,5 +117,3 @@ function parseGitHubURL(link) {
 
 // Main call
 main()
-
-export { setIsNewExport };

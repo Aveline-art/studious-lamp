@@ -1,3 +1,10 @@
-// TODO centralize state of globals for the project form here
-// This object will be exported and have all the functions in place to add more functionality
-// This is basically a config for the initial state of the project form page
+import { createState } from "../utility.js";
+
+var initialState = {
+    isNew: true,
+    rows: 1,
+}
+
+var global = createState(initialState)
+
+export { global };

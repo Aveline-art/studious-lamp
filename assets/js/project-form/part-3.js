@@ -1,20 +1,9 @@
-import { createState, toogleSeries, createDomObject } from '../utility.js';
+import { toogleSeries, createDomObject } from '../utility.js';
+import { global } from './state.js';
 
-// Globals
-var global;
-
-// Sets initial state
-var initialState = {
-    rows: 1,
-}
-
-// key-val pairs where keys are the state (see initialState), and the vals are the functions to run on state change
-const stateRunner = {
-    rows: (rows) => { listenRows(rows) }
-}
 
 function main() {
-    global = createState(initialState, stateRunner);
+    global.addStateListener('rows', listenRows)
     loadListeners();
 }
 

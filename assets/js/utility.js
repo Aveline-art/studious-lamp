@@ -1,15 +1,39 @@
-// TODO turn this into a class, that way it can be used in a central state handler
-function createState(init, runner) {
+function createState(init = {}, runner = {}) {
     const handler = {
         get: function (obj, prop) {
             return obj[prop]
         },
         set: function (obj, prop, value) {
-            obj[prop] = value
-            runner[prop](value)
-            return true
+            obj[prop] = value;
+            if (prop in runner) {
+                for (const f of runner[prop]) {
+                    f(value);
+                }
+            } else {
+                runner[prop] = []
+            }
+            return true;
         }
-    };
+    }
+
+    Object.defineProperty(init, 'addStateListener', {
+        value: function(prop, listener) {
+            if (!(prop in runner)) {
+                runner[prop] = []
+            }
+            runner[prop].push(listener)
+        }
+    });
+
+    Object.defineProperty(init, 'newState', {
+        value: function(prop, val) {
+            if (prop in init) {
+                console.error('State already defined')
+            } else {
+                init[prop] = val
+            }
+        }
+    });
 
     return new Proxy(init, handler)
 }

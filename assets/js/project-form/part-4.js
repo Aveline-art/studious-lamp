@@ -1,19 +1,10 @@
-import { createState, toogleSeries } from '../utility.js';
+import { toogleSeries } from '../utility.js';
+import { global } from './state.js';
 
-// Globals
-var global;
-
-// Sets initial state
-var initialState = {}
-
-// key-val pairs where keys are the state (see initialState), and the vals are the functions to run on state change
-const stateRunner = {
-    projectImage: (projectImage) => listenProjectImage(projectImage),
-    projectHero: (projectHero) => listenProjectHero(projectHero),
-}
 
 function main() {
-    global = createState(initialState, stateRunner);
+    global.addStateListener('projectImage', listenProjectImage)
+    global.addStateListener('projectHero', listenProjectHero)
     loadListeners();
 }
 

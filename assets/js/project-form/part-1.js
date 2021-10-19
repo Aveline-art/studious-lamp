@@ -1,25 +1,12 @@
 // Imports
-import { createState, toogleSeries } from '../utility.js';
-import { setIsNewExport } from './part-2.js';
-
-// Globals
-var global;
-
-// Sets initial state
-var initialState = {
-    isNew: true,
-}
-
-// key-val pairs where keys are the state (see initialState), and the vals are the functions to run on state change
-const stateRunner = {
-    isNew: (isNew) => { listenIsNew(isNew) },
-}
+import { toogleSeries } from '../utility.js';
+import { global } from './state.js';
 
 
 function main() {
     // TODO remove this once testing is done
     localStorage.clear();
-    global = createState(initialState, stateRunner);
+    global.addStateListener('isNew', listenIsNew);
     loadListeners();
 }
 
@@ -52,6 +39,7 @@ function loadNextButtonListener() {
     });
 }
 
+
 /////////////////////
 /// State Setters ///
 /////////////////////
@@ -59,8 +47,8 @@ function loadNextButtonListener() {
 function setIsNew(event) {
     const eventVal = event.target.value;
     global.isNew = eventVal == 'true';
-    setIsNewExport(global.isNew);
 }
+
 
 ///////////////////////
 /// State Listeners ///
@@ -77,6 +65,7 @@ function listenIsNew(val) {
         existingInput.removeAttribute('hidden');
     }
 }
+
 
 ///////////////////////
 /// Other Functions ///
