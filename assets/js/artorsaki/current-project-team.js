@@ -5,7 +5,7 @@ const gitHubAvatarURLBase = 'https://avatars.githubusercontent.com/';
 
 function main() {
     document.addEventListener('DOMContentLoaded', () => {
-        const data = JSON.parse(localStorage.getItem('projectData'));
+        const data = JSON.parse(localStorage.getItem('projectFormData'));
         const leaderCardsNode = document.getElementById('leader-cards');
         linkCreator(leaderCardsNode, data.projectLeaders)
     })

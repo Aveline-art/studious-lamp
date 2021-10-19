@@ -110,11 +110,11 @@ function constructLeadershipRows(rows) {
 }
 
 function storeItems() {
-    const data = localStorage.getItem('projectData');
-    var projectData = data ? JSON.parse(data) : {}
+    const data = localStorage.getItem('projectFormData');
+    var projectFormData = data ? JSON.parse(data) : {}
 
-    projectData.projectLeaders = gatherLeaders();
-    localStorage.setItem('projectData', JSON.stringify(projectData));
+    projectFormData.projectLeaders = gatherLeaders();
+    localStorage.setItem('projectFormData', JSON.stringify(projectFormData));
 }
 
 function gatherLeaders() {

@@ -3,6 +3,11 @@ import { toogleSeries } from '../utility.js';
 import { global } from './state.js';
 
 
+const projectFiles = {
+
+}
+
+
 function main() {
     // TODO remove this once testing is done
     localStorage.clear();
@@ -71,12 +76,19 @@ function listenIsNew(val) {
 /// Other Functions ///
 ///////////////////////
 
-function storeItems() {
-    const data = localStorage.getItem('projectData');
-    var projectData = data ? JSON.parse(data) : {}
+// TODO, takes a name of a project, then finds the files and parses it into the data object, which will eventually be set as a state in global, which will be set wholesale into localstorage
+function parseProject(name) {
+    var projectData = {}
 
-    projectData.projectName = document.getElementById('project-name-input').value;
-    localStorage.setItem('projectData', JSON.stringify(projectData));
+    return projectData
+}
+
+function storeItems() {
+    const data = localStorage.getItem('projectFormData');
+    var projectFormData = data ? JSON.parse(data) : {}
+
+    projectFormData.projectName = document.getElementById('project-name-input').value;
+    localStorage.setItem('projectFormData', JSON.stringify(projectFormData));
 }
 
 // Main call

@@ -23,10 +23,9 @@
     <div class="col-4 mb-3" id="existing-input" hidden>
         <label class="form-label" for="project-name-select">Choose your project:</label>
         <select class="form-select" id="project-name-select" name="project-name-select">
-            <option value="website">Hackforla.org Website</option>
-            <option value="100automations">100 Automations</option>
-            <option value="civictechjobs" selected>Civic Tech Jobs</option>
-            <option value="worlddomination">World Domination</option>
+            {% for project in site.projects %}
+            <option value="{{ project.identification }}">{{ project.title }}</option>
+            {% endfor %}
         </select>
     </div>
 </div>

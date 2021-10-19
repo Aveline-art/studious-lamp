@@ -9,7 +9,7 @@ const svgDefault = './assets/images/svgs/ionicons_svg_ios-link.svg'
 
 function main() {
     document.addEventListener('DOMContentLoaded', () => {
-        const data = JSON.parse(localStorage.getItem('projectData'));
+        const data = JSON.parse(localStorage.getItem('projectFormData'));
         const resourceCardsNode = document.getElementById('resource-cards')
         linkCreator(resourceCardsNode, data.githubURL, data.slackURL, data.websiteURL, data.wikiURL);
     })

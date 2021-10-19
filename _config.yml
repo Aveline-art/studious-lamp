@@ -21,6 +21,8 @@ baseurl: /studious-lamp      # place folder name if the site is served in a subf
 collections:
   authors:
     output: true
+  projects:
+    output: true
     
 defaults:
   - scope:

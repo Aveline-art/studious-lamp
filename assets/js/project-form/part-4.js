@@ -90,16 +90,16 @@ function listenProjectHero(image) {
 ///////////////////////
 
 function storeItems() {
-    const data = localStorage.getItem('projectData');
-    var projectData = data ? JSON.parse(data) : {}
+    const data = localStorage.getItem('projectFormData');
+    var projectFormData = data ? JSON.parse(data) : {}
 
     const imagePromise = getImageURL(global.projectImage)
     const heroPromise = getImageURL(global.projectHero)
 
     Promise.all([imagePromise, heroPromise]).then((data) => {
-        projectData.projectImage = data[0]
-        projectData.projectHero = data[1]
-        localStorage.setItem('projectData', JSON.stringify(projectData));
+        projectFormData.projectImage = data[0]
+        projectFormData.projectHero = data[1]
+        localStorage.setItem('projectFormData', JSON.stringify(projectFormData));
     });
 }
 

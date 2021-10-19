@@ -2,7 +2,7 @@ import { createDomObject } from '../utility.js'
 
 function main() {
     document.addEventListener('DOMContentLoaded', () => {
-        const data = JSON.parse(localStorage.getItem('projectData'));
+        const data = JSON.parse(localStorage.getItem('projectFormData'));
 
         document.getElementById('project-status').innerText = data.projectStatus
         document.getElementById('project-location').innerText = joinArray(data.locations)
