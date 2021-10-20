@@ -102,7 +102,7 @@ function storeItems() {
         }
     ];
     projectFormData.technologies = document.getElementById('technologies').value.split('\n');
-    projectFormData.tools = document.getElementById('tools').value.split('\n');
+    projectFormData.tools = document.getElementById('tools').value.replaceAll('\n', ', ');
     projectFormData.locations = document.getElementById('locations').value.split('\n')
     projectFormData.programAreas = parseProgramAreas();
 

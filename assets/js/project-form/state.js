@@ -11,9 +11,38 @@ const projectData = {
 var initialState = {
     isNew: true,
     rows: 1,
-    projectFormData: {},
+    projectFormData: {
+        title: '',
+        status: 'Active',
+        description: '',
+        links: [],
+        technologies: [],
+        tools: '',
+        location: [],
+        'program-area': [],
+    },
 }
 
-var global = createState(initialState)
+function clearData() {
+    setProjectFormData({...initialState.projectFormData})
+    localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
+}
 
-export { global, projectData };
+function storeData(data) {
+    setProjectFormData(data)
+    localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
+}
+
+function setProjectFormData(data) {
+    global.projectFormData = data
+}
+
+var global = createState({...initialState})
+const data = localStorage.getItem('projectFormData')
+if (data) {
+    storeData(data)
+} else {
+    localStorage.setItem('projectFormData', global.projectFormData)
+}
+
+export { global, projectData, clearData, setProjectFormData, storeData };

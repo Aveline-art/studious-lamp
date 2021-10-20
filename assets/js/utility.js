@@ -56,4 +56,8 @@ function createDomObject(tag, attributes) {
     return item
 }
 
-export { createState, toogleSeries, createDomObject };
+function getDefault(obj, prop, profit) {
+    return obj[prop] || profit
+}
+
+export { createState, toogleSeries, createDomObject, getDefault };

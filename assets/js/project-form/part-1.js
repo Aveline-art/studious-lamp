@@ -1,11 +1,9 @@
 // Imports
 import { toogleSeries } from '../utility.js';
-import { global, projectData } from './state.js';
+import { global, projectData, clearData, setProjectFormData } from './state.js';
 
 
 function main() {
-    // TODO remove this once testing is done
-    localStorage.clear();
     global.addStateListener('isNew', listenIsNew);
     loadListeners();
 }
@@ -13,6 +11,7 @@ function main() {
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
         loadNewOrExistingInputListener()
+        loadClearButtonListener()
         loadNextButtonListener()
     });
 }
@@ -33,6 +32,13 @@ function loadNewOrExistingInputListener() {
     }
 }
 
+function loadClearButtonListener() {
+    var ele = document.getElementById('clear-button');
+    ele.addEventListener('click', () => {
+        clearData()
+    })
+}
+
 function loadNextButtonListener() {
     var ele = document.getElementById('next-button-1');
     ele.addEventListener('click', () => {
@@ -48,10 +54,6 @@ function loadNextButtonListener() {
 
 function setIsNew(val) {
     global.isNew = val == 'true';
-}
-
-function setProjectFormData(data) {
-    global.projectFormData = data
 }
 
 
@@ -77,17 +79,15 @@ function listenIsNew(val) {
 ///////////////////////
 
 function storeItems() {
-    const data = localStorage.getItem('projectFormData');
-    var projectFormData = data ? JSON.parse(data) : {}
     if (global.isNew) {
-        projectFormData.title = document.getElementById('project-name-input').value
+        clearData()
+        global.projectFormData.title = document.getElementById('project-name-input').value
     } else {
         const identification = document.getElementById('project-name-select').value;
-        projectFormData = projectData[identification]
+        const result = {...global.projectFormData, ...projectData[identification]}
+        setProjectFormData(result)
     }
-    localStorage.setItem('projectFormData', JSON.stringify(projectFormData));
-    setProjectFormData(projectFormData);
-    // TODO remove once everythins is done with
+    localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
     for (const item in global.projectFormData) {
         console.log(item, ':', global.projectFormData[item])
     }
