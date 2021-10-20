@@ -1,5 +1,5 @@
 ---
-permalink: /artorsaki
+permalink: /preview
 ---
 <!doctype html>
 <html lang="en">
@@ -7,7 +7,7 @@ permalink: /artorsaki
 <head>
     <meta charset="utf-8">
     <title>I Ship ArtoriaxSasaki</title>
-    <link rel="stylesheet" href="{{ '/assets/css/artorsaki.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/project-preview.css' | relative_url }}">
 
     <!-- Import Roboto font from Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,20 +19,20 @@ permalink: /artorsaki
     <div id="app">
         {% include header.html %}
         <main role="main" id="content">
-            {% include artorsaki/hero.html %}
+            {% include project-preview/hero.html %}
 
             <div class="content-section project-home-page">
                 <!--Project Description Card-->
-                {% include artorsaki/project-overview.html %}
+                {% include project-preview/project-overview.html %}
 
                 <!--Project Resources Card-->
-                {% include artorsaki/resources.html %}
+                {% include project-preview/resources.html %}
 
                 <!-- Project Team Card -->
                 <div id="project-team-card"
                     class="page-card card-primary page-card-lg page-card--project-description-page">
-                    {% include artorsaki/current-project-team.html %}
-                    {% include artorsaki/all-time-contributors.html %}
+                    {% include project-preview/current-project-team.html %}
+                    {% include project-preview/all-time-contributors.html %}
                 </div>
             </div>
         </main>

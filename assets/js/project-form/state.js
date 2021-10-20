@@ -24,6 +24,8 @@ var initialState = {
 }
 
 function clearData() {
+    localStorage.clear()
+    console.log('local storage has been cleaned')
     setProjectFormData({...initialState.projectFormData})
     localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
 }

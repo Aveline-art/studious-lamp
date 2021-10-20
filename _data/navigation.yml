@@ -2,13 +2,9 @@
   link: /
 - name: About
   link: /about
-- name: Blog
-  link: /blog
-- name: Staff
-  link: /staff
-- name: Quiz
-  link: /quiz
 - name: ArtorSaki
   link: /artorsaki
+- name: Preview
+  link: /preview
 - name: Results
   link: /results
