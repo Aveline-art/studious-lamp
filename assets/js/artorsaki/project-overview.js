@@ -4,13 +4,13 @@ function main() {
     document.addEventListener('DOMContentLoaded', () => {
         const data = JSON.parse(localStorage.getItem('projectFormData'));
 
-        document.getElementById('project-status').innerText = data.projectStatus
+        document.getElementById('project-status').innerText = data.status
         document.getElementById('project-location').innerText = joinArray(data.locations)
         const projectLinksNode = document.getElementById('project-links')
-        linkCreator(projectLinksNode, data.githubURL, data.slackURL, data.websiteURL, data.wikiURL);
+        linkCreator(projectLinksNode, data.links);
         document.getElementById('tools').innerText = joinArray(data.tools)
         document.getElementById('technologies').innerText = joinArray(data.technologies)
-        document.getElementById('project-description').innerText = data.projectDescription
+        document.getElementById('project-description').innerText = data.description
     })
 }
 
@@ -22,16 +22,16 @@ function joinArray(arr) {
     }
 }
 
-function linkCreator(ele, ...args) {
+function linkCreator(ele, links) {
     while (ele.firstChild) {
         ele.removeChild(ele.firstChild);
     }
 
-    for (const item of args) {
-        if (item.link) {
+    for (const item of links) {
+        if (item.url) {
             const linkNode = createDomObject('a', {
                 'target': '_blank',
-                'href': item.link,
+                'href': item.url,
             })
             linkNode.innerText = `${item.name}`
             ele.append(linkNode, document.createTextNode(", "))

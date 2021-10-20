@@ -11,20 +11,20 @@ function main() {
     document.addEventListener('DOMContentLoaded', () => {
         const data = JSON.parse(localStorage.getItem('projectFormData'));
         const resourceCardsNode = document.getElementById('resource-cards')
-        linkCreator(resourceCardsNode, data.githubURL, data.slackURL, data.websiteURL, data.wikiURL);
+        linkCreator(resourceCardsNode, data.links);
     })
 }
 
-function linkCreator(ele, ...args) {
+function linkCreator(ele, links) {
     while (ele.firstChild) {
         ele.removeChild(ele.firstChild);
     }
 
-    for (const item of args) {
-        if (item.link) {
+    for (const item of links) {
+        if (item.url) {
             const linkNode = createDomObject('a', {
                 'target': '_blank',
-                'href': item.link,
+                'href': item.url,
                 'class': 'resource-link',
             })
             const listNode = createDomObject('li', {

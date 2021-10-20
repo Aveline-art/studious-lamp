@@ -1,11 +1,6 @@
 // Imports
 import { toogleSeries } from '../utility.js';
-import { global } from './state.js';
-
-
-const projectFiles = {
-
-}
+import { global, projectData } from './state.js';
 
 
 function main() {
@@ -31,7 +26,9 @@ function loadNewOrExistingInputListener() {
     const children = ele.children;
     for (const child of children) {
         if (child.className == 'form-check') {
-            child.getElementsByTagName('input')[0].addEventListener('click', setIsNew);
+            child.getElementsByTagName('input')[0].addEventListener('click', (e) => {
+                setIsNew(e.target.value);
+            });
         }
     }
 }
@@ -49,9 +46,12 @@ function loadNextButtonListener() {
 /// State Setters ///
 /////////////////////
 
-function setIsNew(event) {
-    const eventVal = event.target.value;
-    global.isNew = eventVal == 'true';
+function setIsNew(val) {
+    global.isNew = val == 'true';
+}
+
+function setProjectFormData(data) {
+    global.projectFormData = data
 }
 
 
@@ -76,19 +76,21 @@ function listenIsNew(val) {
 /// Other Functions ///
 ///////////////////////
 
-// TODO, takes a name of a project, then finds the files and parses it into the data object, which will eventually be set as a state in global, which will be set wholesale into localstorage
-function parseProject(name) {
-    var projectData = {}
-
-    return projectData
-}
-
 function storeItems() {
     const data = localStorage.getItem('projectFormData');
     var projectFormData = data ? JSON.parse(data) : {}
-
-    projectFormData.projectName = document.getElementById('project-name-input').value;
+    if (global.isNew) {
+        projectFormData.title = document.getElementById('project-name-input').value
+    } else {
+        const identification = document.getElementById('project-name-select').value;
+        projectFormData = projectData[identification]
+    }
     localStorage.setItem('projectFormData', JSON.stringify(projectFormData));
+    setProjectFormData(projectFormData);
+    // TODO remove once everythins is done with
+    for (const item in global.projectFormData) {
+        console.log(item, ':', global.projectFormData[item])
+    }
 }
 
 // Main call

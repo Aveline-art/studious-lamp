@@ -11,8 +11,9 @@ const projectData = {
 var initialState = {
     isNew: true,
     rows: 1,
+    projectFormData: {},
 }
 
 var global = createState(initialState)
 
-export { global };
+export { global, projectData };
