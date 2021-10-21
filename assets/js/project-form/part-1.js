@@ -1,9 +1,10 @@
 // Imports
 import { toogleSeries } from '../utility.js';
-import { global, projectData, clearData, setProjectFormData } from './state.js';
+import { global, projectData, clearData, storeData } from './state.js';
 
 
 function main() {
+    setFields(global.isNew)
     global.addStateListener('isNew', listenIsNew);
     loadListeners();
 }
@@ -16,19 +17,42 @@ function loadListeners() {
     });
 }
 
+
+/////////////////////
+/// Field Setters ///
+/////////////////////
+
+function setFields(val) {
+    const newInput = document.getElementById('new-input');
+    const existingInput = document.getElementById('existing-input');
+    const newRadio = document.getElementById('new-radio');
+    const existingRadio = document.getElementById('existing-radio')
+
+    if (val) {
+        newInput.removeAttribute('hidden');
+        existingInput.setAttribute('hidden', '');
+        newRadio.setAttribute('checked', '')
+        existingRadio.removeAttribute('checked')
+    } else {
+        newInput.setAttribute('hidden', '');
+        existingInput.removeAttribute('hidden');
+        newRadio.removeAttribute('checked')
+        existingRadio.setAttribute('checked', '')
+    }
+}
+
+
 ///////////////////////
 /// Event Listeners ///
 ///////////////////////
 
 function loadNewOrExistingInputListener() {
-    const ele = document.getElementById('new-or-existing');
-    const children = ele.children;
-    for (const child of children) {
-        if (child.className == 'form-check') {
-            child.getElementsByTagName('input')[0].addEventListener('click', (e) => {
-                setIsNew(e.target.value);
-            });
-        }
+    const newRadio = document.getElementById('new-radio');
+    const existingRadio = document.getElementById('existing-radio');
+    for (const ele of [newRadio, existingRadio]) {
+        ele.addEventListener('click', (e) => {
+            setIsNew(e.target.value);
+        });
     }
 }
 
@@ -48,29 +72,21 @@ function loadNextButtonListener() {
 }
 
 
+///////////////////////
+/// State Listeners ///
+///////////////////////
+
+function listenIsNew(val) {
+    setFields(val)
+}
+
+
 /////////////////////
 /// State Setters ///
 /////////////////////
 
 function setIsNew(val) {
     global.isNew = val == 'true';
-}
-
-
-///////////////////////
-/// State Listeners ///
-///////////////////////
-
-function listenIsNew(val) {
-    const newInput = document.getElementById('new-input');
-    const existingInput = document.getElementById('existing-input');
-    if (val) {
-        newInput.removeAttribute('hidden');
-        existingInput.setAttribute('hidden', '');
-    } else {
-        newInput.setAttribute('hidden', '');
-        existingInput.removeAttribute('hidden');
-    }
 }
 
 
@@ -82,9 +98,10 @@ function storeItems() {
     if (global.isNew) {
         clearData()
         global.projectFormData.title = document.getElementById('project-name-input').value
+        storeData(global.projectFormData)
     } else {
         const identification = document.getElementById('project-name-select').value;
-        setProjectFormData(projectData[identification])
+        storeData(projectData[identification])
     }
     localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
     // TODO remove once I am done

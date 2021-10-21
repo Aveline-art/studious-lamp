@@ -78,4 +78,4 @@ function clearData() {
 // Main call
 main()
 
-export { global, projectData, clearData, setProjectFormData, storeData };
+export { global, projectData, clearData, storeData };
