@@ -84,13 +84,14 @@ function storeItems() {
         global.projectFormData.title = document.getElementById('project-name-input').value
     } else {
         const identification = document.getElementById('project-name-select').value;
-        const result = {...global.projectFormData, ...projectData[identification]}
-        setProjectFormData(result)
+        setProjectFormData(projectData[identification])
     }
     localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
+    // TODO remove once I am done
+    /*
     for (const item in global.projectFormData) {
         console.log(item, ':', global.projectFormData[item])
-    }
+    }*/
 }
 
 // Main call

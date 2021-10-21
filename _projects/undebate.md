@@ -32,7 +32,7 @@ technologies:
   - Express
   - React
   - Node.js
-location:
+# location:
   # - Santa Monica
   # - Remote
 partner: EnCiv.org, Ballotpedia.org

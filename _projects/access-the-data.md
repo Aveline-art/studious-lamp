@@ -77,7 +77,7 @@ looking:
     skill: Instructional Designer
   - category: UI/UX
     skill: Logo and Design System
-technologies: 
+# technologies: 
   #- Node.js 
   #- ReactJS 
   #- Ruby on Rails

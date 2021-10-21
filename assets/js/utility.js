@@ -1,4 +1,5 @@
-function createState(init = {}, runner = {}) {
+function createState(init = {}) {
+    const runner = {}
     const handler = {
         get: function (obj, prop) {
             return obj[prop]
@@ -25,17 +26,30 @@ function createState(init = {}, runner = {}) {
         }
     });
 
-    Object.defineProperty(init, 'newState', {
-        value: function(prop, val) {
-            if (prop in init) {
-                console.error('State already defined')
-            } else {
-                init[prop] = val
-            }
-        }
-    });
+    return [new Proxy(init, handler), runner]
+}
 
-    return new Proxy(init, handler)
+function createNestedState(dict, dictRunner, key, init = {}) {
+    dictRunner[key] = []
+    
+    const handler = {
+        get: function (obj, prop) {
+            return obj[prop]
+        },
+        set: function (obj, prop, value) {
+            obj[prop] = value;
+            if (key in dictRunner) {
+                for (const f of dictRunner[key]) {
+                    f(dict[key]);
+                }
+            } else {
+                dictRunner[prop] = []
+            }
+            return true;
+        }
+    }
+
+    dict[key] = new Proxy(init, handler)
 }
 
 function toogleSeries(seriesId, targetId) {
@@ -56,8 +70,10 @@ function createDomObject(tag, attributes) {
     return item
 }
 
-function getDefault(obj, prop, profit) {
-    return obj[prop] || profit
+function deep(object) {
+    return JSON.parse(JSON.stringify(object))
 }
 
-export { createState, toogleSeries, createDomObject, getDefault };
+
+
+export { createState, createNestedState, toogleSeries, createDomObject, deep };
