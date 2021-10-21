@@ -100,11 +100,14 @@ function storeItems() {
     ];
     data.technologies = document.getElementById('technologies').value.split('\n');
     data.tools = document.getElementById('tools').value.replaceAll('\n', ', ');
-    data.locations = document.getElementById('locations').value.split('\n')
-    //data.programAreas = parseProgramAreas();
+    data.location = document.getElementById('locations').value.split('\n')
+    data['program-area'] = parseProgramAreas();
 
-    getGitHubRepoId(findLink(data.links, 'github')).then((data) => {
-        data.identification = data.id
+    // TODO this needs to be skipped if identification is retrieved from existing data, or if no GH link is given
+    getGitHubRepoId(findLink(data.links, 'github')).then((results) => {
+        if (results) {
+            data.identification = results.id.toString()
+        }
         storeData(data)
     });
 
@@ -120,7 +123,7 @@ function parseProgramAreas() {
             arr.push(input.value);
         }
     }
-    return arr
+    return arr.join(', ')
 }
 
 function getGitHubRepoId(link) {
@@ -137,9 +140,9 @@ function getGitHubRepoId(link) {
 }
 
 function parseGitHubURL(link) {
-    const regexp = /github.com\/(.*)\/(.*)/i
+    const regexp = /github.com\/(.*?)\/(.*)/i
     const results = link.match(regexp);
-    return [results[1], results[2]]
+    return [results[1].replace('/', ''), results[2].replace('/', '')]
 }
 
 // Main call
