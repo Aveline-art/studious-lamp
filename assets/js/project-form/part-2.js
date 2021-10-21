@@ -1,5 +1,5 @@
 import { toogleSeries } from '../utility.js';
-import { global } from './state.js';
+import { global, storeData } from './state.js';
 
 
 function main() {
@@ -41,10 +41,6 @@ function loadBackButtonListener() {
 /// State Setters ///
 /////////////////////
 
-function setProjectFormData(data) {
-    global.projectFormData = data
-}
-
 ///////////////////////
 /// State Listeners ///
 ///////////////////////
@@ -58,15 +54,6 @@ function listenProjectFormData(data) {
 /// Other Functions ///
 ///////////////////////
 
-function findLink(links, website) {
-    for (const link of links) {
-        if (link.name.toLowerCase() == website.toLowerCase()) {
-            return link.url
-        }
-    }
-    return null
-}
-
 function constructFields(data) {
     document.getElementById('project-status').value = data.status
     document.getElementById('project-description').value = data.description
@@ -79,15 +66,21 @@ function constructFields(data) {
     document.getElementById('locations').value = data.location.join('\n')
 }
 
-// TODO, store  global.projectFormData whole sale into local storage
-function storeItems() {
-    /*
-    const data = localStorage.getItem('projectFormData');
-    var projectFormData = data ? JSON.parse(data) : {}
+function findLink(links, website) {
+    for (const link of links) {
+        if (link.name.toLowerCase() == website.toLowerCase()) {
+            return link.url
+        }
+    }
+    return null
+}
 
-    projectFormData.status = document.getElementById('project-status').value;
-    projectFormData.description = document.getElementById('project-description').value;
-    projectFormData.links = [
+function storeItems() {
+    var data = {}
+
+    data.status = document.getElementById('project-status').value;
+    data.description = document.getElementById('project-description').value;
+    data.links = [
         {
             name: 'Github',
             url: document.getElementById('github-url').value,
@@ -105,17 +98,15 @@ function storeItems() {
             url: document.getElementById('wiki-url').value,
         }
     ];
-    projectFormData.technologies = document.getElementById('technologies').value.split('\n');
-    projectFormData.tools = document.getElementById('tools').value.replaceAll('\n', ', ');
-    projectFormData.locations = document.getElementById('locations').value.split('\n')
-    projectFormData.programAreas = parseProgramAreas();
+    data.technologies = document.getElementById('technologies').value.split('\n');
+    data.tools = document.getElementById('tools').value.replaceAll('\n', ', ');
+    data.locations = document.getElementById('locations').value.split('\n')
+    //data.programAreas = parseProgramAreas();
 
-    getGitHubRepoId(projectFormData.githubURL).then((data) => {
-        projectFormData.identification = data.id
-        localStorage.setItem('projectFormData', JSON.stringify(projectFormData));
-        setProjectFormData(projectFormData)
+    getGitHubRepoId(findLink(data.links, 'github')).then((data) => {
+        data.identification = data.id
+        storeData(data)
     });
-    */
 
     // second promise for repo languages
 }
