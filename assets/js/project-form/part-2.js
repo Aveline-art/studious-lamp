@@ -30,8 +30,7 @@ function setFields(data) {
     document.getElementById('technologies').value = data.technologies.join('\n')
     document.getElementById('tools').value = data.tools.replaceAll(', ','\n')
     document.getElementById('locations').value = data.location.join('\n')
-
-    //TODO program areas and any other missing fields
+    setProgramAreaFields(data['program-area'])
 }
 
 
@@ -82,6 +81,17 @@ function findLink(links, website) {
     return null
 }
 
+function setProgramAreaFields(areas) {
+    const programAreas = document.getElementById('program-areas');
+    const inputs = programAreas.getElementsByTagName('input');
+    for (const input of inputs) {
+        input.checked = false
+        if (areas.includes(input.value)) {
+            input.checked = true
+        }
+    }
+}
+
 function storeItems() {
     var data = {}
 
@@ -108,20 +118,26 @@ function storeItems() {
     data.technologies = document.getElementById('technologies').value.split('\n');
     data.tools = document.getElementById('tools').value.replaceAll('\n', ', ');
     data.location = document.getElementById('locations').value.split('\n')
-    data['program-area'] = parseProgramAreas();
+    data['program-area'] = parseProgramArea();
 
     // TODO this needs to be skipped if identification is retrieved from existing data, or if no GH link is given
-    getGitHubRepoId(findLink(data.links, 'github')).then((results) => {
-        if (results) {
-            data.identification = results.id.toString()
-        }
-        storeData(data)
-    });
+    const gitHubURL = findLink(data.links, 'github')
+    if (gitHubURL) {
+        const [owner, repo] = parseGitHubURL(gitHubURL)
+        const repoIdPromise = getGitHubRepoId(owner, repo)
+        const repoLanguagePromise = getGitHubRepoLanguage(owner, repo)
 
-    // second promise for repo languages
+        Promise.all([repoIdPromise, repoLanguagePromise]).then((results) => {
+            data.identification = results[0].id.toString()
+            data.language = Object.keys(results[1])
+            storeData(data)
+        });
+    } else {
+        storeData(data)
+    }
 }
 
-function parseProgramAreas() {
+function parseProgramArea() {
     const programAreas = document.getElementById('program-areas');
     const inputs = programAreas.getElementsByTagName('input');
     var arr = []
@@ -130,15 +146,33 @@ function parseProgramAreas() {
             arr.push(input.value);
         }
     }
-    return arr.join(', ')
+    return arr
 }
 
-function getGitHubRepoId(link) {
+function getGitHubRepoId(owner, repo) {
 
     return new Promise((resolve) => {
         try {
-            const [owner, repo] = parseGitHubURL(link)
             fetch(`https://api.github.com/repos/${owner}/${repo}`)
+                .then(response => { 
+                    if (response.status == 200) {
+                        resolve(response.json()) 
+                    } else {
+                        resolve(null)
+                    }
+                })
+        }
+        catch {
+            resolve('')
+        }
+    });
+}
+
+function getGitHubRepoLanguage(owner, repo) {
+
+    return new Promise((resolve) => {
+        try {
+            fetch(`https://api.github.com/repos/${owner}/${repo}/languages`)
                 .then(response => { 
                     if (response.status == 200) {
                         resolve(response.json()) 

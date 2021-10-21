@@ -36,6 +36,7 @@ var initialStateNestedProjectFormData = {
     visible: true,
     status: 'Active',
     'program-area': [],
+    language: [],
 }
 
 function main() {
