@@ -3,9 +3,9 @@ import { global, storeData } from './state.js';
 
 
 function main() {
+    setFields(global.projectFormData);
     global.addStateListener('projectFormData', listenProjectFormData);
     loadListeners();
-    constructFields(global.projectFormData)
 }
 
 function loadListeners() {
@@ -13,6 +13,25 @@ function loadListeners() {
         loadNextButtonListener();
         loadBackButtonListener();
     });
+}
+
+
+/////////////////////
+/// Field Setters ///
+/////////////////////
+
+function setFields(data) {
+    document.getElementById('project-status').value = data.status
+    document.getElementById('project-description').value = data.description
+    document.getElementById('github-url').value = findLink(data.links, 'github')
+    document.getElementById('slack-url').value = findLink(data.links, 'slack')
+    document.getElementById('website-url').value = findLink(data.links, 'site')
+    document.getElementById('wiki-url').value = findLink(data.links, 'wiki')
+    document.getElementById('technologies').value = data.technologies.join('\n')
+    document.getElementById('tools').value = data.tools.replaceAll(', ','\n')
+    document.getElementById('locations').value = data.location.join('\n')
+
+    //TODO program areas and any other missing fields
 }
 
 
@@ -46,25 +65,13 @@ function loadBackButtonListener() {
 ///////////////////////
 
 function listenProjectFormData(data) {
-    constructFields(data)
+    setFields(data)
 }
 
 
 ///////////////////////
 /// Other Functions ///
 ///////////////////////
-
-function constructFields(data) {
-    document.getElementById('project-status').value = data.status
-    document.getElementById('project-description').value = data.description
-    document.getElementById('github-url').value = findLink(data.links, 'github')
-    document.getElementById('slack-url').value = findLink(data.links, 'slack')
-    document.getElementById('website-url').value = findLink(data.links, 'site')
-    document.getElementById('wiki-url').value = findLink(data.links, 'wiki')
-    document.getElementById('technologies').value = data.technologies.join('\n')
-    document.getElementById('tools').value = data.tools.replaceAll(', ','\n')
-    document.getElementById('locations').value = data.location.join('\n')
-}
 
 function findLink(links, website) {
     for (const link of links) {
@@ -131,7 +138,14 @@ function getGitHubRepoId(link) {
     return new Promise((resolve) => {
         try {
             const [owner, repo] = parseGitHubURL(link)
-            fetch(`https://api.github.com/repos/${owner}/${repo}`).then(response => resolve(response.json()))
+            fetch(`https://api.github.com/repos/${owner}/${repo}`)
+                .then(response => { 
+                    if (response.status == 200) {
+                        resolve(response.json()) 
+                    } else {
+                        resolve(null)
+                    }
+                })
         }
         catch {
             resolve('')
