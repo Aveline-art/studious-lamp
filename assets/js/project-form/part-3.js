@@ -1,9 +1,11 @@
 import { toogleSeries, createDomObject } from '../utility.js';
-import { global } from './state.js';
+import { global, storeData } from './state.js';
 
 
 function main() {
+    setFields(global.projectFormData)
     global.addStateListener('rows', listenRows)
+    global.addStateListener('projectFormData', listenLeaders)
     loadListeners();
 }
 
@@ -12,9 +14,27 @@ function loadListeners() {
         loadNextButtonListener();
         loadBackButtonListener();
         loadNumLeadsInputListener();
-        constructLeadershipRows(global.rows);
     });
 }
+
+
+/////////////////////
+/// Field Setters ///
+/////////////////////
+
+function setFields(data) {
+    var num = data.leadership.length
+    if (num < 1) {
+        num = 1
+    } else if (num > 10) {
+        num = 10
+    }
+
+    setRows(num)
+    constructLeadershipRows(num, data.leadership)
+    document.getElementById('num-leads').value = num
+}
+
 
 ///////////////////////
 /// Event Listeners ///
@@ -22,7 +42,9 @@ function loadListeners() {
 
 function loadNumLeadsInputListener() {
     const ele = document.getElementById('num-leads')
-    ele.addEventListener('input', setRows);
+    ele.addEventListener('input', (e) => {
+        setRows(e.target.value)
+    });
 }
 
 function loadNextButtonListener() {
@@ -45,76 +67,107 @@ function loadBackButtonListener() {
 /// State Setters ///
 /////////////////////
 
-function setRows(event) {
-    const eventVal = event.target.value;
-    if (eventVal >= 1 & eventVal <= 10) {
-        global.rows = eventVal;
+function setRows(val) {
+    if (val >= 1 & val <= 10) {
+        global.rows = val;
     }
 }
+
 
 ///////////////////////
 /// State Listeners ///
 ///////////////////////
 
 function listenRows(num) {
-    constructLeadershipRows(num);
+    const leadershipRows = document.getElementById('leadership-rows');
+    var currentLen = leadershipRows.children.length
+
+    while (currentLen < num) {
+        leadershipRows.append(createRow(currentLen + 1));
+        currentLen++
+    }
+
+    while (currentLen > num) {
+        leadershipRows.removeChild(leadershipRows.lastChild)
+        currentLen--
+    }
+}
+
+function listenLeaders(data) {
+    setFields(data)
 }
 
 ///////////////////////
 /// Other Functions ///
 ///////////////////////
 
-function constructLeadershipRows(rows) {
+// TODO, if data changed, remake the entire thing, else only remove what is needed
+// For now, just have it remake every time, and work out the logic later in Issue#9
+
+function constructLeadershipRows(rows, leadership=[]) {
     const leadershipRows = document.getElementById('leadership-rows');
     while (leadershipRows.firstChild) {
         leadershipRows.removeChild(leadershipRows.firstChild);
     }
 
     for (let i = 0; i < rows; i++) {
-        const rowNode = createDomObject('div', {
-            'class': 'row mb-1',
-            'id': `leader-${i + 1}`,
-        })
-
-        const col1 = createDomObject('div', { 'class': 'col-1' });
-        const child1 = document.createTextNode(`${i + 1}`);
-        col1.appendChild(child1);
-
-        const col2 = createDomObject('div', { 'class': 'col-4' });
-        const child2 = createDomObject('input', {
-            'type': 'text',
-            'class': 'form-control',
-            'name': 'leaderName',
-        });
-        col2.append(child2);
-
-        const col3 = createDomObject('div', { 'class': 'col-3' });
-        const child3 = createDomObject('input', {
-            'type': 'text',
-            'class': 'form-control',
-            'name': 'leaderRole',
-        });
-        col3.append(child3);
-
-        const col4 = createDomObject('div', { 'class': 'col-4' });
-        const child4 = createDomObject('input', {
-            'type': 'text',
-            'class': 'form-control',
-            'name': 'leaderGithub',
-        });
-        col4.append(child4);
-
-        rowNode.append(col1, col2, col3, col4);
+        const rowNode = createRow(i+1, leadership[i])
         leadershipRows.append(rowNode);
     }
 }
 
-function storeItems() {
-    const data = localStorage.getItem('projectFormData');
-    var projectFormData = data ? JSON.parse(data) : {}
+function createRow(rowNum, leader = null) {
+    const rowNode = createDomObject('div', {
+        'class': 'row mb-1',
+        'id': `leader-${rowNum}`,
+    })
 
-    projectFormData.projectLeaders = gatherLeaders();
-    localStorage.setItem('projectFormData', JSON.stringify(projectFormData));
+    const col1 = createDomObject('div', { 'class': 'col-1' });
+    const child1 = document.createTextNode(`${rowNum}`);
+    col1.appendChild(child1);
+
+    const col2 = createDomObject('div', { 'class': 'col-4' });
+    const child2 = createDomObject('input', {
+        'type': 'text',
+        'class': 'form-control',
+        'name': 'leaderName',
+    });
+    col2.append(child2);
+
+    const col3 = createDomObject('div', { 'class': 'col-3' });
+    const child3 = createDomObject('input', {
+        'type': 'text',
+        'class': 'form-control',
+        'name': 'leaderRole',
+    });
+    col3.append(child3);
+
+    const col4 = createDomObject('div', { 'class': 'col-4' });
+    const child4 = createDomObject('input', {
+        'type': 'text',
+        'class': 'form-control',
+        'name': 'leaderGithub',
+    });
+    col4.append(child4);
+
+    if (leader) {
+        child2.value = leader.name
+        child3.value = leader.role
+        child4.value = leader.links.github
+    } else {
+        child2.value = ''
+        child3.value = ''
+        child4.value = ''
+    }
+
+    rowNode.append(col1, col2, col3, col4);
+    return rowNode
+}
+
+function storeItems() {
+    var data = {}
+    data.leadership = gatherLeaders();
+    storeData(data);
 }
 
 function gatherLeaders() {
@@ -126,6 +179,7 @@ function gatherLeaders() {
 
         const inputs = child.getElementsByTagName('input');
         for (const input of inputs) {
+            // TODO a lot smarter way of saving this data into the format that we need
             leader[input.name] = input.value;
         }
         leaders.push(leader);

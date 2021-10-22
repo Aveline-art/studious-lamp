@@ -103,7 +103,6 @@ function storeItems() {
         const identification = document.getElementById('project-name-select').value;
         storeData(projectData[identification])
     }
-    localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
     // TODO remove once I am done
     /*
     for (const item in global.projectFormData) {
