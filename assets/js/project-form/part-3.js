@@ -171,16 +171,26 @@ function storeItems() {
 }
 
 function gatherLeaders() {
+    const leaderShipInfoObj = {
+        'leaderName': 'name',
+        'leaderRole': 'role',
+        'leaderGithub':'github',
+    }
+
     var ele = document.getElementById('leadership-rows');
     var children = ele.childNodes;
     var leaders = []
     for (const child of children) {
         var leader = {}
+        leader.links = {}
 
         const inputs = child.getElementsByTagName('input');
         for (const input of inputs) {
-            // TODO a lot smarter way of saving this data into the format that we need
-            leader[input.name] = input.value;
+            if (input.name == 'leaderGithub') {
+                leader['links'][leaderShipInfoObj[input.name]] = input.value
+            } else {
+                leader[leaderShipInfoObj[input.name]] = input.value;
+            }
         }
         leaders.push(leader);
     }
