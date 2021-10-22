@@ -93,7 +93,9 @@ function setProgramAreaFields(areas) {
 }
 
 function storeItems() {
-    var data = {}
+    var data = {
+        _noMD: {}
+    }
 
     data.status = document.getElementById('project-status').value;
     data.description = document.getElementById('project-description').value;
@@ -129,7 +131,7 @@ function storeItems() {
 
         Promise.all([repoIdPromise, repoLanguagePromise]).then((results) => {
             data.identification = results[0].id.toString()
-            data.language = Object.keys(results[1])
+            data._noMD.language = Object.keys(results[1])
             storeData(data)
         });
     } else {

@@ -34,9 +34,13 @@ var initialStateNestedProjectFormData = {
     location: [],
     partner: '',
     visible: true,
-    status: 'Active',
     'program-area': [],
-    language: [],
+    status: 'Active',
+    _noMD: {
+        language: [],
+        projectImage: '',
+        projectHero: ''
+    }
 }
 
 function main() {
