@@ -22,37 +22,48 @@ function linkCreator(ele, links) {
 
     for (const item of links) {
         if (item.url) {
-            const linkNode = createDomObject('a', {
-                'target': '_blank',
-                'href': item.url,
-                'class': 'resource-link',
-            })
-            const listNode = createDomObject('li', {
-                'class': 'resource-card'
-            })
-
-            const imageDivNode = createDomObject('div', {
-                'class': 'resource-img',
-            })
-            const imageNode = createDomObject('img', {
-                'src': getDefault(svgLinks, item.name, svgDefault)
-            })
-            imageDivNode.append(imageNode);
-
-            const titleDivNode = createDomObject('div', {
-                'class': 'resource-body',
-            })
-            const titleNode = createDomObject('h4', {
-                'class': 'resource-title'
-            })
-            titleNode.innerText = item.name
-            titleDivNode.append(titleNode)
-
-            listNode.append(imageDivNode, titleDivNode)
-            linkNode.append(listNode)
+            const linkNode = createLinkDOM(item)
             ele.append(linkNode)
         }
     }
+
+    if (!ele.hasChildNodes()) {
+        const linkNode = createLinkDOM({ name: 'Lorem', url: '' });
+        ele.append(linkNode);
+    }
+}
+
+function createLinkDOM(item) {
+    const linkNode = createDomObject('a', {
+        'target': '_blank',
+        'href': item.url,
+        'class': 'resource-link',
+    })
+    const listNode = createDomObject('li', {
+        'class': 'resource-card'
+    })
+
+    const imageDivNode = createDomObject('div', {
+        'class': 'resource-img',
+    })
+    const imageNode = createDomObject('img', {
+        'src': getDefault(svgLinks, item.name, svgDefault)
+    })
+    imageDivNode.append(imageNode);
+
+    const titleDivNode = createDomObject('div', {
+        'class': 'resource-body',
+    })
+    const titleNode = createDomObject('h4', {
+        'class': 'resource-title'
+    })
+    titleNode.innerText = item.name
+    titleDivNode.append(titleNode)
+
+    listNode.append(imageDivNode, titleDivNode)
+    linkNode.append(listNode)
+
+    return linkNode
 }
 
 function getDefault(dict, field, option) {

@@ -1,4 +1,4 @@
-import { createDomObject } from '../utility.js'
+import { createDomObject, loremIpsum } from '../utility.js'
 
 const gitHubURLBase = 'https://github.com/';
 const gitHubAvatarURLBase = 'https://avatars.githubusercontent.com/';
@@ -28,7 +28,7 @@ function linkCreator(ele, args) {
         })
         const leaderImgNode = createDomObject('img', {
             'class': 'leader-img',
-            'src': `${gitHubAvatarURLBase}${item.links.github}`,
+            'src': `${gitHubAvatarURLBase}${item.links.github || 'elizabethhonest'}`,
         })
 
         const leaderDivNode = createDomObject('div', {
@@ -44,7 +44,7 @@ function linkCreator(ele, args) {
             'target': 'blank',
             'title': 'Slack Direct Message'
         })
-        leaderSlackNode.innerText = item.name
+        leaderSlackNode.innerText = loremIpsum(item.name, 11)
 
         const leaderRolePNode = createDomObject('p', {
             'class': 'leader-description-field',
@@ -54,7 +54,7 @@ function linkCreator(ele, args) {
 
         leaderGitHubNode.append(leaderImgNode);
         leaderNamePNode.append(leaderNameStrongNode, leaderSlackNode)
-        leaderRolePNode.append(leaderRoleStrongNode, document.createTextNode(`${item.role}`))
+        leaderRolePNode.append(leaderRoleStrongNode, document.createTextNode(`${loremIpsum(item.role, 11)}`))
         leaderDivNode.append(leaderNamePNode, leaderRolePNode)
 
         leaderNode.append(leaderGitHubNode, leaderDivNode)
