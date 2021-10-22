@@ -7,7 +7,7 @@ function main() {
     document.addEventListener('DOMContentLoaded', () => {
         const data = JSON.parse(localStorage.getItem('projectFormData'));
         const leaderCardsNode = document.getElementById('leader-cards');
-        linkCreator(leaderCardsNode, data.projectLeaders)
+        linkCreator(leaderCardsNode, data.leadership)
     })
 }
 
@@ -22,13 +22,13 @@ function linkCreator(ele, args) {
         })
 
         const leaderGitHubNode = createDomObject('a', {
-            'href': `${gitHubURLBase}${item.leaderGithub}`,
+            'href': `${gitHubURLBase}${item.links.github}`,
             'target': '_blank',
             'title': 'GitHub Profile',
         })
         const leaderImgNode = createDomObject('img', {
             'class': 'leader-img',
-            'src': `${gitHubAvatarURLBase}${item.leaderGithub}`,
+            'src': `${gitHubAvatarURLBase}${item.links.github}`,
         })
 
         const leaderDivNode = createDomObject('div', {
@@ -44,7 +44,7 @@ function linkCreator(ele, args) {
             'target': 'blank',
             'title': 'Slack Direct Message'
         })
-        leaderSlackNode.innerText = item.leaderName
+        leaderSlackNode.innerText = item.name
 
         const leaderRolePNode = createDomObject('p', {
             'class': 'leader-description-field',
@@ -54,7 +54,7 @@ function linkCreator(ele, args) {
 
         leaderGitHubNode.append(leaderImgNode);
         leaderNamePNode.append(leaderNameStrongNode, leaderSlackNode)
-        leaderRolePNode.append(leaderRoleStrongNode, document.createTextNode(`${item.leaderRole}`))
+        leaderRolePNode.append(leaderRoleStrongNode, document.createTextNode(`${item.role}`))
         leaderDivNode.append(leaderNamePNode, leaderRolePNode)
 
         leaderNode.append(leaderGitHubNode, leaderDivNode)

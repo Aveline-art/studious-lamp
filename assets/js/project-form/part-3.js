@@ -153,7 +153,7 @@ function createRow(rowNum, leader = null) {
     if (leader) {
         child2.value = leader.name
         child3.value = leader.role
-        child4.value = leader.links.github
+        child4.value = parseUserFromGitHub(leader.links.github)
     } else {
         child2.value = ''
         child3.value = ''
@@ -162,6 +162,14 @@ function createRow(rowNum, leader = null) {
 
     rowNode.append(col1, col2, col3, col4);
     return rowNode
+}
+
+function parseUserFromGitHub(link) {
+    const regexp = /github.com\/(.*)/i
+    const results = link.match(regexp)
+    if (results) {
+        return results[1]
+    }
 }
 
 function storeItems() {

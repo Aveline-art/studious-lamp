@@ -5,10 +5,10 @@ function main() {
         const data = JSON.parse(localStorage.getItem('projectFormData'));
 
         document.getElementById('project-status').innerText = data.status
-        document.getElementById('project-location').innerText = joinArray(data.locations)
+        document.getElementById('project-location').innerText = joinArray(data.location)
         const projectLinksNode = document.getElementById('project-links')
         linkCreator(projectLinksNode, data.links);
-        document.getElementById('tools').innerText = joinArray(data.tools)
+        document.getElementById('tools').innerText = data.tools
         document.getElementById('technologies').innerText = joinArray(data.technologies)
         document.getElementById('project-description').innerText = data.description
     })
