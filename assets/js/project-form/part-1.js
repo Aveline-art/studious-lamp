@@ -96,18 +96,13 @@ function setIsNew(val) {
 
 function storeItems() {
     if (global.isNew) {
-        clearData()
+        clearData() // TODO, this should not happen on click of next, only when the clear data is clicked, this should happen or if a new title is entered
         global.projectFormData.title = document.getElementById('project-name-input').value
         storeData(global.projectFormData)
     } else {
         const identification = document.getElementById('project-name-select').value;
         storeData(projectData[identification])
     }
-    // TODO remove once I am done
-    /*
-    for (const item in global.projectFormData) {
-        console.log(item, ':', global.projectFormData[item])
-    }*/
 }
 
 // Main call
