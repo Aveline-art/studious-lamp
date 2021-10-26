@@ -167,6 +167,7 @@ function createRow(rowNum, leader = null) {
 }
 
 function parseGitHubToUser(link) {
+    console.log(link)
     const regexp = /github.com\/(.*)/i
     const results = link.match(regexp)
     if (results) {
