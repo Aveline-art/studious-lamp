@@ -103,9 +103,6 @@ function listenLeaders(data) {
 /// Other Functions ///
 ///////////////////////
 
-// TODO, if data changed, remake the entire thing, else only remove what is needed
-// For now, just have it remake every time, and work out the logic later in Issue#9
-
 function constructLeadershipRows(rows, leadership=[]) {
     const leadershipRows = document.getElementById('leadership-rows');
     while (leadershipRows.firstChild) {

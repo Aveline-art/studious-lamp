@@ -152,7 +152,6 @@ function parseProgramArea() {
 }
 
 function getGitHubRepoId(owner, repo) {
-
     return new Promise((resolve) => {
         try {
             fetch(`https://api.github.com/repos/${owner}/${repo}`)
@@ -171,7 +170,6 @@ function getGitHubRepoId(owner, repo) {
 }
 
 function getGitHubRepoLanguage(owner, repo) {
-
     return new Promise((resolve) => {
         try {
             fetch(`https://api.github.com/repos/${owner}/${repo}/languages`)
