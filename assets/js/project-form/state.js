@@ -1,11 +1,10 @@
 ---
 ---
 // Imports
-import { createState, createNestedState, deep } from "../utility.js";
+import { createState, deep } from "../utility.js";
 
 // Globals
 var global;
-var globalRunner;
 
 const projectData = {
     {% for project in site.projects %}
@@ -16,37 +15,34 @@ const projectData = {
 var initialState = {
     isNew: true,
     rows: 1,
-}
-
-var initialStateNestedProjectFormData = {
-    identification: '',
-    title: '',
-    description: '',
-    image: '',
-    alt: '',
-    'image-hero': '',
-    'alt-hero': '',
-    leadership: [],
-    links: [],
-    looking: [],
-    technologies: [],
-    tools: '',
-    location: [],
-    partner: '',
-    visible: true,
-    'program-area': [],
-    status: 'Active',
-    _noMD: {
-        language: [],
-        projectImage: '',
-        projectHero: ''
+    projectFormData: {
+        identification: '',
+        title: '',
+        description: '',
+        image: '',
+        alt: '',
+        'image-hero': '',
+        'alt-hero': '',
+        leadership: [],
+        links: [],
+        looking: [],
+        technologies: [],
+        tools: '',
+        location: [],
+        partner: '',
+        visible: true,
+        'program-area': [],
+        status: 'Active',
+        _noMD: {
+            language: [],
+            image: '',
+            'image-hero': ''
+        }
     }
 }
 
 function main() {
-    [global, globalRunner] = createState(deep(initialState))
-    createNestedState(global, globalRunner, 'projectFormData', deep(initialStateNestedProjectFormData))
-
+    global = createState(initialState)
     const data = localStorage.getItem('projectFormData')
     var parsedData = data ? JSON.parse(data) : {}
     if (parsedData) {
@@ -66,6 +62,7 @@ function main() {
  */
 function setProjectFormData(data) {
     Object.assign(global.projectFormData, data)
+    global.runStateListener('projectFormData', global.projectFormData)
 }
 
 function storeData(data) {
@@ -76,7 +73,7 @@ function storeData(data) {
 function clearData() {
     localStorage.clear();
     console.log('data has been cleared')
-    setProjectFormData(deep(initialStateNestedProjectFormData))
+    setProjectFormData(deep(initialState.projectFormData))
     localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
 }
 

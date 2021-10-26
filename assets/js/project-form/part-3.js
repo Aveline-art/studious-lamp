@@ -5,7 +5,7 @@ import { global, storeData } from './state.js';
 function main() {
     setFields(global.projectFormData)
     global.addStateListener('rows', listenRows)
-    global.addStateListener('projectFormData', listenLeaders)
+    global.projectFormData.addStateListener('leadership', listenLeaders)
     loadListeners();
 }
 
@@ -23,7 +23,7 @@ function loadListeners() {
 /////////////////////
 
 function setFields(data) {
-    var num = data.leadership.length
+    var num = data.length
     if (num < 1) {
         num = 1
     } else if (num > 10) {
@@ -31,7 +31,7 @@ function setFields(data) {
     }
 
     setRows(num)
-    constructLeadershipRows(num, data.leadership)
+    constructLeadershipRows(num, data)
     document.getElementById('num-leads').value = num
 }
 

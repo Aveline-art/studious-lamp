@@ -6,29 +6,6 @@ function createDomObject(tag, attributes) {
     return item
 }
 
-function createNestedState(dict, dictRunner, key, init = {}) {
-    dictRunner[key] = []
-    
-    const handler = {
-        get: function (obj, prop) {
-            return obj[prop]
-        },
-        set: function (obj, prop, value) {
-            obj[prop] = value;
-            if (key in dictRunner) {
-                for (const f of dictRunner[key]) {
-                    f(dict[key]);
-                }
-            } else {
-                dictRunner[prop] = []
-            }
-            return true;
-        }
-    }
-
-    dict[key] = new Proxy(init, handler)
-}
-
 function createState(init = {}) {
     const runner = {}
     const handler = {
@@ -36,20 +13,28 @@ function createState(init = {}) {
             return obj[prop]
         },
         set: function (obj, prop, value) {
-            obj[prop] = value;
-            if (prop in runner) {
-                for (const f of runner[prop]) {
-                    f(value);
+            if (obj.hasOwnProperty(prop)) {
+                if (value instanceof Object && Object.getPrototypeOf(value) == Object.prototype) {
+                    obj[prop] = Object.assign(obj[prop], value)
+                } else {
+                    obj[prop] = value;
                 }
-            } else {
-                runner[prop] = []
+
+                if (prop in runner) {
+                    for (const f of runner[prop]) {
+                        f(value);
+                    }
+                } else {
+                    runner[prop] = []
+                }
             }
             return true;
         }
     }
 
-    Object.defineProperty(init, 'addStateListener', {
-        value: function(prop, listener) {
+    const copy = deep(init)
+    Object.defineProperty(copy, 'addStateListener', {
+        value: function (prop, listener) {
             if (!(prop in runner)) {
                 runner[prop] = []
             }
@@ -57,7 +42,26 @@ function createState(init = {}) {
         }
     });
 
-    return [new Proxy(init, handler), runner]
+    Object.defineProperty(copy, 'runStateListener', {
+        value: function (prop, value) {
+            if (prop in runner) {
+                for (const f of runner[prop]) {
+                    f(value);
+                }
+            } else {
+                runner[prop] = []
+            }
+        }
+    });
+
+    for (const [key, val] of Object.entries(deep(init))) {
+        if (val instanceof Object && Object.getPrototypeOf(val) == Object.prototype) {
+            const obj = createState(val)
+            copy[key] = obj
+        }
+    }
+
+    return new Proxy(copy, handler)
 }
 
 function deep(object) {
@@ -97,4 +101,4 @@ function toogleSeries(seriesId, targetId) {
 
 
 
-export { createDomObject, createNestedState, createState, deep, loremIpsum, toogleSeries };
+export { createDomObject, createState, deep, loremIpsum, toogleSeries };
