@@ -22,13 +22,13 @@ function linkCreator(ele, args) {
         })
 
         const leaderGitHubNode = createDomObject('a', {
-            'href': `${gitHubURLBase}${item.links.github}`,
+            'href': item.links.github,
             'target': '_blank',
             'title': 'GitHub Profile',
         })
         const leaderImgNode = createDomObject('img', {
             'class': 'leader-img',
-            'src': `${gitHubAvatarURLBase}${item.links.github || 'elizabethhonest'}`,
+            'src': item.picture || 'https://avatars.githubusercontent.com/elizabethhonest',
         })
 
         const leaderDivNode = createDomObject('div', {

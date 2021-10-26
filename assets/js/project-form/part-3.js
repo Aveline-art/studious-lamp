@@ -1,6 +1,8 @@
 import { toogleSeries, createDomObject } from '../utility.js';
 import { global, storeData } from './state.js';
 
+const gitHubURLBase = 'https://github.com/';
+const gitHubAvatarURLBase = 'https://avatars.githubusercontent.com/';
 
 function main() {
     setFields(global.projectFormData)
@@ -153,7 +155,7 @@ function createRow(rowNum, leader = null) {
     if (leader) {
         child2.value = leader.name
         child3.value = leader.role
-        child4.value = parseUserFromGitHub(leader.links.github)
+        child4.value = parseGitHubToUser(leader.links.github)
     } else {
         child2.value = ''
         child3.value = ''
@@ -164,7 +166,7 @@ function createRow(rowNum, leader = null) {
     return rowNode
 }
 
-function parseUserFromGitHub(link) {
+function parseGitHubToUser(link) {
     const regexp = /github.com\/(.*)/i
     const results = link.match(regexp)
     if (results) {
@@ -195,7 +197,8 @@ function gatherLeaders() {
         const inputs = child.getElementsByTagName('input');
         for (const input of inputs) {
             if (input.name == 'leaderGithub') {
-                leader['links'][leaderShipInfoObj[input.name]] = input.value
+                leader['links'][leaderShipInfoObj[input.name]] = `${gitHubURLBase}${input.value}`
+                leader['picture'] = `${gitHubAvatarURLBase}${input.value}`
             } else {
                 leader[leaderShipInfoObj[input.name]] = input.value;
             }
