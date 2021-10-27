@@ -14,8 +14,8 @@ async function main({ g, c }) {
     github = g;
     context = c;
 
-    console.log(JSON.parse(github))
-    console.log(JSON.parse(context))
+    console.log(JSON.stringify(github))
+    console.log(JSON.stringify(context))
 
     const title = github.event.issue.title
     const body = github.event.issue.body
