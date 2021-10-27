@@ -1,8 +1,13 @@
-<button type="button" class="btn btn-light border-dark" id="copy-button">
+<div class="col">
+  <button type="button" class="btn btn-light border-dark mx-1" id="copy-button" data-target="{{ include.target }}">
     <span class="text-body">
       {% include svg/clipboard-neutral.svg %}
     </span>
     <span>
       Copy
     </span>
-</button>
+  </button>
+  <span class="align-middle mx-1" id="copy-text"></span>
+</div>
+
+<script type="module" src="./assets/js/elements/copy-button.js"></script>
