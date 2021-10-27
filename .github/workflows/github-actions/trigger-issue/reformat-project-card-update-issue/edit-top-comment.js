@@ -17,9 +17,9 @@ async function main({ g, c }) {
     console.log(JSON.stringify(github))
     console.log(JSON.stringify(context))
 
-    const title = github.event.issue.title
-    const body = github.event.issue.body
-    const issueNum = context.payload.number 
+    const title = context.payload.issue.title
+    const body = context.payload.issue.body
+    const issueNum = context.payload.issue.number 
 
     const newIssueComment = formatComment(title, body)
     postComment(issueNum, newIssueComment);
