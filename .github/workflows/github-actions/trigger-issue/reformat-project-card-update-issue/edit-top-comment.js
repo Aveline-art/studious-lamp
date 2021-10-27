@@ -25,7 +25,7 @@ async function main({ g, c }) {
 function formatComment(title, body) {
     const path = './.github/workflows/github-actions/trigger-issue/reformat-project-card-update-issue/project-card-comment.md'
     const text = fs.readFileSync(path).toString('utf-8');
-    const completedInstuctions = text.replace(/${title}/g, findProjectTitle(title)).replace('${body}', body)
+    const completedInstuctions = text.replace(/\${title}/g, findProjectTitle(title)).replace('${body}', body)
     return completedInstuctions
 }
 
