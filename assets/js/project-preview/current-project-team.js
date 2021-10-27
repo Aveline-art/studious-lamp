@@ -1,8 +1,5 @@
 import { createDomObject, loremIpsum } from '../utility.js'
 
-const gitHubURLBase = 'https://github.com/';
-const gitHubAvatarURLBase = 'https://avatars.githubusercontent.com/';
-
 function main() {
     document.addEventListener('DOMContentLoaded', () => {
         const data = JSON.parse(localStorage.getItem('projectFormData'));
