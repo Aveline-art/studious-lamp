@@ -4,7 +4,7 @@ title: Home
 ---
 # Hello World,
 
-I am Nadia, the ArtorSaki bard! If you are here because you want to create a *new* project page, this is a friendly reminder to have the information listed below before getting started with the Artorsaki Project Card Conjuration Wizard. Otherwise, the Wizard can be found [here](/studious-lamp/artorsaki).
+I am Nadia, the ArtorSaki bard! If you are here because you want to create a *new* project page, this is a friendly reminder to have the information listed below before starting the Artorsaki Project Card Conjuration Wizard. Otherwise, the Wizard can be found [here](/studious-lamp/artorsaki).
 
 - name of the project
 - description
