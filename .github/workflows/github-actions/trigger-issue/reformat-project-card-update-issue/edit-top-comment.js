@@ -14,9 +14,6 @@ async function main({ g, c }) {
     github = g;
     context = c;
 
-    console.log(JSON.stringify(github))
-    console.log(JSON.stringify(context))
-
     const title = context.payload.issue.title
     const body = context.payload.issue.body
     const issueNum = context.payload.issue.number 
@@ -26,7 +23,7 @@ async function main({ g, c }) {
 }
 
 function formatComment(title, body) {
-    const path = '/project-card-comment.md'
+    const path = './.github/workflows/github-actions/trigger-issue/reformat-project-card-update-issue/project-card-comment.md'
     const text = fs.readFileSync(path).toString('utf-8');
     const completedInstuctions = text.replace('${title}', title).replace('${body}', body)
     return completedInstuctions
