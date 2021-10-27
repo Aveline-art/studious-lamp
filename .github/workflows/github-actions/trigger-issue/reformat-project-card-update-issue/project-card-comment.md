@@ -1,6 +1,6 @@
 ### Overview
 
-As a developer on the website, we have to make sure that the projects of our organization is up to date for our visitors. For this issue we will update the project card for ${title}
+As a developer on the website, we have to make sure that the projects of our organization is up to date for our visitors. For this issue we will update the project card for ${title}.
 
 ### Action Items
 
