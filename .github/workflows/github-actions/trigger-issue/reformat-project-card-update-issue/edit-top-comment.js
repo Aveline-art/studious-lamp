@@ -25,8 +25,14 @@ async function main({ g, c }) {
 function formatComment(title, body) {
     const path = './.github/workflows/github-actions/trigger-issue/reformat-project-card-update-issue/project-card-comment.md'
     const text = fs.readFileSync(path).toString('utf-8');
-    const completedInstuctions = text.replace('${title}', title).replace('${body}', body)
+    const completedInstuctions = text.replaceAll('${title}', findProjectTitle(title)).replace('${body}', body)
     return completedInstuctions
+}
+
+function findProjectTitle(title) {
+    const regex = /Project Card Update: (.*)/i
+    const results = title.match(regex);
+    return results[1]
 }
 
 async function postComment(issueNum, instructions) {
