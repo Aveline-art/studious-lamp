@@ -11,12 +11,12 @@ alt-hero: ${data['alt-hero']}
 leadership: ${formatLeadership(data.leadership).join('')}
 links: ${formatLinks(data.links).join('')}
 looking: ${formatLooking(data.looking).join('')}
-technologies: ${'\n  -' + data.technologies.join('\n  -')}
+technologies: ${'\n  - ' + data.technologies.join('\n  - ')}
 tools: ${data.tools}
-location: ${'\n  -' + data.location.join('\n  -')}
+location: ${'\n  - ' + data.location.join('\n  - ')}
 visible: ${data.visible}
 status: ${data.status}
-program-area: ${'\n  -' + data['program-area'].join('\n  -')}
+program-area: ${'\n  - ' + data['program-area'].join('\n  - ')}
 ---
 `
 
