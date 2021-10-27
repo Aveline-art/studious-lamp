@@ -106,7 +106,6 @@ function setHeroImage() {
 /// State Listeners ///
 ///////////////////////
 
-// Figure out how to cache the image promise here instead of below
 function listenProjectImage(image) {
     const ele = document.getElementById('project-image-preview')
     ele.src = image
