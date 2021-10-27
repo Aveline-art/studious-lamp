@@ -15,5 +15,5 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
-            const script = require('.\.github/github-actions/trigger-issue/reformat-project-card-update-issue/edit-top-comment.js')
+            const script = require('./.github/github-actions/trigger-issue/reformat-project-card-update-issue/edit-top-comment.js')
             script({g: github, c: context})
