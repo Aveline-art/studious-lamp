@@ -4,7 +4,9 @@ function main() {
     document.addEventListener('DOMContentLoaded', () => {
         const data = JSON.parse(localStorage.getItem('projectFormData'));
 
-        document.getElementById('project-status').innerText = loremIpsum(data.status, 6)
+        const projectStatusEle = document.getElementById('project-status')
+        projectStatusEle.innerText = loremIpsum(data.status, 6)
+        setStatusIndicator(projectStatusEle, data.status)
         document.getElementById('project-location').innerText = joinArray(loremIpsum(data.location, 2))
         const projectLinksNode = document.getElementById('project-links')
         linkCreator(projectLinksNode, data.links);
@@ -13,6 +15,18 @@ function main() {
         document.getElementById('technologies').innerText = joinArray(loremIpsum(data.technologies, 3))
         document.getElementById('project-description').innerText = loremIpsum(data.description, 445)
     })
+}
+
+function setStatusIndicator(ele, status) {
+    const indicators = {
+        'active': 'status-Active',
+        'on hold': 'status-On-Hold', // note: this class does not currently exist; the website uses the default yellow color, instead
+        'completed': 'status-Completed',
+        'rebooting': 'status-Rebooting',
+    }
+
+    const parent = ele.parentElement
+    parent.classList.add(status ? indicators[status.toLowerCase()] : 'status-Active')
 }
 
 function joinArray(arr) {
