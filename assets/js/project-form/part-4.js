@@ -4,8 +4,10 @@ import { global, storeData } from './state.js';
 
 function main() {
     setFields(global.projectFormData)
-    global.projectFormData._noMD.addStateListener('image', listenProjectImage)
-    global.projectFormData._noMD.addStateListener('image-hero', listenProjectHero)
+    global.projectFormData._noMD.addStateListener('image', listenProjectUploadImage)
+    global.projectFormData._noMD.addStateListener('image-hero', listenProjectUploadHero)
+    global.projectFormData.addStateListener('image', listenProjectImage)
+    global.projectFormData.addStateListener('image-hero', listenProjectHero)
     loadListeners();
 }
 
@@ -108,12 +110,22 @@ function setHeroImage() {
 
 function listenProjectImage(image) {
     const ele = document.getElementById('project-image-preview')
-    ele.src = image
+    ele.src = global.projectFormData._noMD.image || '.' + image
 }
 
 function listenProjectHero(image) {
     const ele = document.getElementById('project-hero-preview');
-    ele.src = image
+    ele.src = global.projectFormData._noMD['image-hero'] || '.' + image
+}
+
+function listenProjectUploadImage(image) {
+    const ele = document.getElementById('project-image-preview')
+    ele.src = image || '.' + global.projectFormData.image
+}
+
+function listenProjectUploadHero(image) {
+    const ele = document.getElementById('project-hero-preview');
+    ele.src = image || '.' + global.projectFormData['image-hero']
 }
 
 
