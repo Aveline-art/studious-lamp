@@ -27,10 +27,10 @@ function setFields(data) {
     document.getElementById('slack-url').value = findLink(data.links, 'slack')
     document.getElementById('website-url').value = findLink(data.links, 'site')
     document.getElementById('wiki-url').value = findLink(data.links, 'wiki')
-    document.getElementById('technologies').value = data.technologies.join('\n')
     document.getElementById('tools').value = data.tools.replaceAll(', ','\n')
     document.getElementById('locations').value = data.location.join('\n')
-    setProgramAreaFields(data['program-area'])
+    setCheckBoxFields(data['program-area'], document.getElementById('program-areas'))
+    setCheckBoxFields(data.technologies, document.getElementById('technologies'))
 }
 
 
@@ -81,12 +81,12 @@ function findLink(links, website) {
     return null
 }
 
-function setProgramAreaFields(areas) {
-    const programAreas = document.getElementById('program-areas');
-    const inputs = programAreas.getElementsByTagName('input');
+function setCheckBoxFields(arr, element) {
+    arr = arr.map(name => name.toLowerCase());
+    const inputs = element.getElementsByTagName('input');
     for (const input of inputs) {
         input.checked = false
-        if (areas.includes(input.value)) {
+        if (arr.includes(input.value.toLowerCase())) {
             input.checked = true
         }
     }

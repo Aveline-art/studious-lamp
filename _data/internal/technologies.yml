@@ -8,3 +8,7 @@
   name: PlaceHolder4
 - id: placeholder5
   name: PlaceHolder5
+- id: jekyll
+  name: Jekyll
+- id: gh-pages
+  name: GitHub Pages

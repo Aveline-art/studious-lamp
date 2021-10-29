@@ -45,12 +45,6 @@
 </div>
 <div class="row">
     <div class="col mb-3">
-        <label class="form-label" for="technologies">List out your project's technologies (use a newline for
-            each):</label>
-        <textarea class="form-control" id="technologies" name="technologies"
-            placeholder="GitHub Pages&#10;Jekyll&#10;Docker" rows="6" cols="50"></textarea>
-    </div>
-    <div class="col mb-3">
         <label class="form-label" for="tools">List out your project's tools (use a newline for each):</label>
         <textarea class="form-control" id="tools" name="tools"
             placeholder="Figma&#10;Google Drive&#10;Zoom&#10;Google Analytics" rows="6" cols="50"></textarea>
@@ -61,68 +55,47 @@
         <textarea class="form-control" id="locations" name="locations"
             placeholder="Downtown LA&#10;Santa Monica&#10;South LA" rows="6" cols="50"></textarea>
     </div>
-</div>
-<div class="row">
     <div class="col mb-3" id="program-areas">
         <label class="form-label">What are the program areas? Pick all that apply.</label>
+        {% assign sorted_program_areas = site.data.internal.program-areas | sort %}
+        {% for item in sorted_program_areas %}
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Citizen Engagement" id="citizen-engagement"
-                name="citizen-engagement">
-            <label class="form-check-label" for="citizen-engagement">
-                Citizen Engagement
+            <input class="form-check-input" type="checkbox" value="{{ item[1].name }}" id="{{ item[1].id }}"
+                name="{{ item[1].id }}">
+            <label class="form-check-label" for="{{ item[1].id }}">
+                {{ item[1].name }}
             </label>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Civic Tech Infrastructure"
-                id="civic-tech-infrastructure" name="civic-tech-infrastructure">
-            <label class="form-check-label" for="civic-tech-infrastructure">
-                Civic Tech Infrastructure
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Diversity, Equity, and Inclusion"
-                id="diversity-equity-inclusion" name="diversity-equity-inclusion">
-            <label class="form-check-label" for="diversity-equity-inclusion">
-                Diversity, Equity, and Inclusion
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Environment"
-                id="environment" name="environment">
-            <label class="form-check-label" for="environment">
-                Environment
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Justice"
-                id="justice" name="justice">
-            <label class="form-check-label" for="justice">
-                Justice
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Social Safety Net"
-                id="social-safety-net" name="social-safety-net">
-            <label class="form-check-label" for="social-safety-net">
-                Social Safety Net
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Vote / Representation"
-                id="vote-representation" name="vote-representation">
-            <label class="form-check-label" for="vote-representation">
-                Vote / Representation
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Workforce Development"
-                id="workforce-development" name="workforce-development">
-            <label class="form-check-label" for="workforce-development">
-                Workforce Development
-            </label>
-        </div>
+        {% endfor %}
     </div>
 </div>
+<div class="row">
+    <div class="col-4 mb-3" id="technologies">
+        <label class="form-label">What are the technologies used? Pick all that apply.</label>
+            {% assign sorted_technologies = site.data.internal.technologies | sort: "name" %}
+            {% for item in sorted_technologies %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{ item.name }}" id="{{ item.id }}"
+                    name="{{ item.id }}">
+                <label class="form-check-label" for="{{ item.id }}">
+                    {{ item.name }}
+                </label>
+            </div>
+            {% endfor %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Other" id="other" name="other">
+                <label class="form-check-label" for="other">
+                    Other, please specify
+                </label>
+            </div>
+    </div>
+    <div class="col-4 mb-3 visually-hidden">
+        <label class="form-label" for="tools">List out your project's technologies (use a newline for each):</label>
+        <textarea class="form-control" id="tools" name="tools"
+            placeholder="Figma&#10;Google Drive&#10;Zoom&#10;Google Analytics" rows="6" cols="50"></textarea>
+    </div>
+</div>
+
 <button type="button" class="btn btn-primary mb-3" id="back-button-2">Back</button>
 <button type="button" class="btn btn-primary mb-3" id="next-button-2">Next</button>
 <script type="module" src="./assets/js/project-form/part-2.js"></script>
