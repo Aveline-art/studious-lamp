@@ -6,7 +6,7 @@
   link: /architecture
 - name: ArtorSaki
   link: /artorsaki
-- name: Preview
+- name: Preview # TODO remove once mvp is reached
   link: /preview
-- name: Results
+- name: Results # TODO remove once mvp is reached
   link: /results

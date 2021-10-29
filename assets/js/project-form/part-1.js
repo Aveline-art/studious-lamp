@@ -67,6 +67,7 @@ function loadNewOrExistingInputListener() {
     }
 }
 
+// TODO remove once mvp is reached
 function loadClearButtonListener() {
     var ele = document.getElementById('clear-button');
     ele.addEventListener('click', () => {
