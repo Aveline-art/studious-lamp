@@ -4,9 +4,9 @@ function dataToMarkdown(data) {
 identification: ${data.identification}
 title: ${data.title}
 description: ${data.description}
-image: ${data._noMD.image ? 'see new image in post' : data.image}
+image: ${data._noMD.image ? 'see new image below' : data.image}
 alt: ${data.alt}
-image-hero: ${data._noMD.image ? 'see new image in post' : data['image-hero']}
+image-hero: ${data._noMD['image-hero'] ? 'see new image below' : data['image-hero']}
 alt-hero: ${data['alt-hero']}
 leadership: ${formatLeadership(data.leadership).join('')}
 links: ${formatLinks(data.links).join('')}

@@ -6,8 +6,9 @@ function main() {
     setFields(global.projectFormData)
     global.projectFormData._noMD.addStateListener('image', listenProjectUploadImage)
     global.projectFormData._noMD.addStateListener('image-hero', listenProjectUploadHero)
-    global.projectFormData.addStateListener('image', listenProjectImage)
-    global.projectFormData.addStateListener('image-hero', listenProjectHero)
+    //global.projectFormData.addStateListener('image', listenProjectImage)
+    //global.projectFormData.addStateListener('image-hero', listenProjectHero)
+    global.addStateListener('projectFormData', listenProjectFormData)
     loadListeners();
 }
 
@@ -40,6 +41,9 @@ function setFields(data) {
     } else if (data['image-hero']) {
         ele.src = '.' + data['image-hero']
     }
+
+    document.getElementById('project-image-alt').value = data.alt
+    document.getElementById('project-hero-alt').value = data['alt-hero']
 }
 
 
@@ -108,6 +112,10 @@ function setHeroImage() {
 /// State Listeners ///
 ///////////////////////
 
+function listenProjectFormData(data) {
+    setFields(data)
+}
+
 // TODO refactor this to remove redundant code
 function listenProjectImage(image) {
     const ele = document.getElementById('project-image-preview')
@@ -138,6 +146,9 @@ function storeItems() {
     var data = {
         _noMD: {}
     }
+
+    data.alt = document.getElementById('project-image-alt').value
+    data['alt-hero'] = document.getElementById('project-hero-alt').value
 
     storeData(data)
 }

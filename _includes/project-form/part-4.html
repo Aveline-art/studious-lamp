@@ -1,33 +1,27 @@
-<div class="row">
-    <div class="col mb-3">
-        <label class="form-label" for="project-image">Upload a project image</label>
-        <input type="file" class="form-control" id="project-image" name="project-image" accept="image/*">
-        <img src="" class="img-fluid mt-1 img-thumbnail" id="project-image-preview">
-    </div>
-
-    <div class="col mb-3">
-        <label class="form-label" for="project-hero">Upload a hero image</label>
-        <input type="file" class="form-control" id="project-hero" name="project-hero" accept="image/*">
-        <img src="" class="img-fluid mt-1 img-thumbnail" id="project-hero-preview">
-    </div>
-</div>
-<!--
 <div class="row mb-3">
     <div class="col">
-        <label class="form-label" for="winner">Who should have won the Fourth Holy Grail War?</label>
-        <select class="form-select" id="winner" name="winner">
-            <option value="iskandar" selected>Iskandar</option>
-            <option value="iskandar">Waver's Servant</option>
-            <option value="iskandar">Rider</option>
-            <option value="iskandar">Whoever won 4th place</option>
-            <option value="iskandar">Lord El Melloi II's former Servant</option>
-            <option value="iskandar">Alexander the Great</option>
-            <option value="iskandar">Ionioi Hetairoi because the true Grail is all the friends we made along the way
-            </option>
-        </select>
+        <label class="form-label" for="project-image">Upload a project image</label>
+        <input type="file" class="form-control" id="project-image" name="project-image" accept="image/*">
+        <img src="" class="img-fluid mt-1 img-thumbnail mb-3" id="project-image-preview">
+        <div class="input-group">
+            <span class="input-group-text">Alt-text</span>
+            <input type="text" class="form-control" id="project-image-alt">
+        </div>
+    </div>
+
+    <div class="col">
+        <label class="form-label" for="project-hero">Upload a hero image</label>
+        <input type="file" class="form-control" id="project-hero" name="project-hero" accept="image/*">
+        <img src="" class="img-fluid mt-1 img-thumbnail mb-3" id="project-hero-preview">
+        <div class="input-group">
+            <span class="input-group-text">Alt-text</span>
+            <input type="text" class="form-control" id="project-hero-alt">
+        </div>
     </div>
 </div>
--->
+<div class="row">
+    <p>Don't know what good alt text is? Check out <a href="https://moz.com/learn/seo/alt-text" target="_blank">this resource</a> for help.</p>
+</div>
 
 <button type="button" class="btn btn-primary mb-3" id="back-button-4">Back</button>
 <a class="btn btn-primary mb-3" href="./preview" id="submit-button">Submit</a>
