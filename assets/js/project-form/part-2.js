@@ -117,6 +117,7 @@ function storeItems() {
             url: document.getElementById('wiki-url').value,
         }
     ];
+    // Needs to redo and parse
     data.technologies = document.getElementById('technologies').value.split('\n');
     data.tools = document.getElementById('tools').value.replaceAll('\n', ', ');
     data.location = document.getElementById('locations').value.split('\n')

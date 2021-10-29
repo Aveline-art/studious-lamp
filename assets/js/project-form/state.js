@@ -36,7 +36,8 @@ var initialState = {
         _noMD: {
             language: [],
             image: '',
-            'image-hero': ''
+            'image-hero': '',
+            'other-technologies': []
         }
     }
 }
