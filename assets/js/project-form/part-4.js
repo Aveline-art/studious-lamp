@@ -108,6 +108,7 @@ function setHeroImage() {
 /// State Listeners ///
 ///////////////////////
 
+// TODO refactor this to remove redundant code
 function listenProjectImage(image) {
     const ele = document.getElementById('project-image-preview')
     ele.src = global.projectFormData._noMD.image || '.' + image

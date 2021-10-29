@@ -108,10 +108,11 @@ function setNewOrExisting(val) {
 function storeItems() {
     const val = global.newOrExisting
     if (val == '1') {
-        clearData() // TODO, this should not happen on click of next, only when the clear data is clicked, this should happen or if a new title is entered
+        clearData(); // TODO, this should not happen on click of next, only when the clear data is clicked, this should happen or if a new title is entered
         global.projectFormData.title = document.getElementById('project-name-input').value
         storeData(global.projectFormData)
     } else if (val == '2') {
+        clearData();
         const identification = document.getElementById('project-name-select').value;
         storeData(projectData[identification])
     } else if (val == '3') {
