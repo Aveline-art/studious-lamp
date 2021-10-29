@@ -1,0 +1,109 @@
+/* This page is built using a mobile first method.  Plain tags apply to mobile. Breakpoints below for larger sizes. */
+
+// CSS Grid 
+
+// Makes the sticky navigation stick
+.sticky-nav {
+  grid-area: nav;
+  display: none;
+  background: #fff;
+  border: 0px solid rgba(51, 51, 51, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 0 8px 0 rgba(51, 51, 51, 0.2);
+  overflow: hidden;
+  width: 17%;
+  padding: 20px 20px 20px 30px; // @aveline-art changed for stick-nav component
+  margin-top: 30px;
+  opacity: 0.2;
+  transition: 0.3s;
+
+  * {
+    display: none;
+    margin-top: 15px;
+  }
+
+  ul {
+    display: block;
+  }
+
+  h3 {
+    display: block;
+    margin: 0px 0px;
+  }
+}
+
+.sticky-nav:hover {
+  padding: 20px 20px 15px 30px; // @aveline-art changed for stick-nav component
+  * {
+    display: block;
+  }
+}
+
+.stick-it {
+  position: fixed;
+  top: 60px; // @aveline-art, changed for stick-nav component
+  left: 1070px;
+  z-index: 1020; // @aveline-art, added for sticky-nav component
+}
+
+// Style the sticky nav links
+.sticky-nav li {
+  list-style-type: none;
+  position: relative;
+}
+
+// @aveline-art, added for sticky-nav component
+.sticky-nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+// Make the active link different
+.sticky-nav li:hover {
+  font-weight: 700;
+  color:#333 !important;
+  a {
+    font-weight: 700;
+    &:link,
+    &:visited,
+    &:hover,
+    &:active,
+    &:focus {
+      color: $color-black;
+    }
+  }
+}
+
+.sticky-nav li:hover::before {
+  position: absolute;
+  content: "\25C0";
+  font-size: 10px;
+  margin-left: -15px;
+  margin-top: 5px;
+}
+
+.sticky-nav:hover {
+  opacity: 1.0;
+}
+
+
+//Bigger than desktop - 960px
+@media #{$bp-desktop-up} {
+  .sticky-nav {
+    display: block;
+    margin-right: 20px;
+  }
+
+  .sticky-nav a {
+    text-decoration: none;
+  }
+} // End desktop-up
+
+// These are to control the responsive location of the sticky nav
+
+@media only screen and (max-width: 1321px) {
+  .stick-it {
+    right: 0px;
+    left: auto;
+  }
+}

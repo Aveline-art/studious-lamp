@@ -10,7 +10,7 @@ image-hero: ${data._noMD.image ? 'see new image in post' : data['image-hero']}
 alt-hero: ${data['alt-hero']}
 leadership: ${formatLeadership(data.leadership).join('')}
 links: ${formatLinks(data.links).join('')}
-looking: ${formatLooking(data.looking).join('')}
+looking: ${data.looking ? formatLooking(data.looking).join('') : ''}
 technologies: ${'\n  - ' + data.technologies.join('\n  - ')}
 tools: ${data.tools}
 location: ${'\n  - ' + data.location.join('\n  - ')}
