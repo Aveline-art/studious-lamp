@@ -13,7 +13,7 @@ const projectData = {
 }
 
 var initialState = {
-    isNew: true,
+    newOrExisting: '1',
     rows: 1,
     projectFormData: {
         identification: '',
@@ -77,7 +77,12 @@ function clearData() {
     localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
 }
 
+function loadAndStoreData() {
+    const data = JSON.parse(localStorage.getItem('projectFormData'));
+    storeData(data)
+}
+
 // Main call
 main()
 
-export { global, projectData, clearData, storeData };
+export { global, projectData, clearData, storeData, loadAndStoreData };

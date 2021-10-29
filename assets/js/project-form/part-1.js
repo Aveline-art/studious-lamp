@@ -1,11 +1,11 @@
 // Imports
 import { toogleSeries } from '../utility.js';
-import { global, projectData, clearData, storeData } from './state.js';
+import { global, projectData, clearData, storeData, loadAndStoreData } from './state.js';
 
 
 function main() {
-    setFields(global.isNew)
-    global.addStateListener('isNew', listenIsNew);
+    setFields(global.newOrExisting)
+    global.addStateListener('newOrExisting', listenNewOrExisting);
     loadListeners();
 }
 
@@ -26,18 +26,28 @@ function setFields(val) {
     const newInput = document.getElementById('new-input');
     const existingInput = document.getElementById('existing-input');
     const newRadio = document.getElementById('new-radio');
-    const existingRadio = document.getElementById('existing-radio')
+    const existingRadio = document.getElementById('existing-radio');
+    const localRadio = document.getElementById('local-radio');
 
-    if (val) {
+
+    if (val == '1') {
         newInput.removeAttribute('hidden');
         existingInput.setAttribute('hidden', '');
-        newRadio.setAttribute('checked', '')
-        existingRadio.removeAttribute('checked')
-    } else {
+        newRadio.setAttribute('checked', '');
+        existingRadio.removeAttribute('checked');
+        localRadio.removeAttribute('checked');
+    } else if (val == '2') {
         newInput.setAttribute('hidden', '');
         existingInput.removeAttribute('hidden');
-        newRadio.removeAttribute('checked')
-        existingRadio.setAttribute('checked', '')
+        newRadio.removeAttribute('checked');
+        existingRadio.setAttribute('checked', '');
+        localRadio.removeAttribute('checked');
+    } else {
+        newInput.setAttribute('hidden', '');
+        existingInput.setAttribute('hidden', '');
+        newRadio.removeAttribute('checked');
+        existingRadio.removeAttribute('checked');
+        localRadio.setAttribute('checked', '');
     }
 }
 
@@ -49,9 +59,10 @@ function setFields(val) {
 function loadNewOrExistingInputListener() {
     const newRadio = document.getElementById('new-radio');
     const existingRadio = document.getElementById('existing-radio');
-    for (const ele of [newRadio, existingRadio]) {
+    const localRadio = document.getElementById('local-radio');
+    for (const ele of [newRadio, existingRadio, localRadio]) {
         ele.addEventListener('click', (e) => {
-            setIsNew(e.target.value);
+            setNewOrExisting(e.target.value);
         });
     }
 }
@@ -76,7 +87,7 @@ function loadNextButtonListener() {
 /// State Listeners ///
 ///////////////////////
 
-function listenIsNew(val) {
+function listenNewOrExisting(val) {
     setFields(val)
 }
 
@@ -85,8 +96,8 @@ function listenIsNew(val) {
 /// State Setters ///
 /////////////////////
 
-function setIsNew(val) {
-    global.isNew = val == 'true';
+function setNewOrExisting(val) {
+    global.newOrExisting = val;
 }
 
 
@@ -95,13 +106,16 @@ function setIsNew(val) {
 ///////////////////////
 
 function storeItems() {
-    if (global.isNew) {
+    const val = global.newOrExisting
+    if (val == '1') {
         clearData() // TODO, this should not happen on click of next, only when the clear data is clicked, this should happen or if a new title is entered
         global.projectFormData.title = document.getElementById('project-name-input').value
         storeData(global.projectFormData)
-    } else {
+    } else if (val == '2') {
         const identification = document.getElementById('project-name-select').value;
         storeData(projectData[identification])
+    } else if (val == '3') {
+        loadAndStoreData()
     }
 }
 
