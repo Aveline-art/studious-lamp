@@ -29,7 +29,8 @@
     <div class="col-4 mb-3" id="existing-input" hidden>
         <label class="form-label" for="project-name-select">Choose your project:</label>
         <select class="form-select" id="project-name-select" name="project-name-select">
-            {% for project in site.projects %}
+            {% assign sorted_projects = site.projects | sort_natural: "title" %}
+            {% for project in sorted_projects %}
             <option value="{{ project.identification }}">{{ project.title }}</option>
             {% endfor %}
         </select>
