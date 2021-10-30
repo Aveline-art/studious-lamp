@@ -12,7 +12,6 @@ function main() {
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
         loadNewOrExistingInputListener()
-        loadClearButtonListener()
         loadNextButtonListener()
     });
 }
@@ -25,29 +24,56 @@ function loadListeners() {
 function setFields(val) {
     const newInput = document.getElementById('new-input');
     const existingInput = document.getElementById('existing-input');
+    const localLinks = document.getElementById('local-links');
+    const uploadData = document.getElementById('upload-data');
+
     const newRadio = document.getElementById('new-radio');
     const existingRadio = document.getElementById('existing-radio');
     const localRadio = document.getElementById('local-radio');
+    const uploadRadio = document.getElementById('upload-radio');
 
 
     if (val == '1') {
         newInput.removeAttribute('hidden');
         existingInput.setAttribute('hidden', '');
+        localLinks.setAttribute('hidden', '');
+        uploadData.setAttribute('hidden', '');
+
         newRadio.setAttribute('checked', '');
         existingRadio.removeAttribute('checked');
         localRadio.removeAttribute('checked');
+        uploadRadio.removeAttribute('checked');
     } else if (val == '2') {
         newInput.setAttribute('hidden', '');
         existingInput.removeAttribute('hidden');
+        localLinks.setAttribute('hidden', '');
+        uploadData.setAttribute('hidden', '');
+
         newRadio.removeAttribute('checked');
         existingRadio.setAttribute('checked', '');
         localRadio.removeAttribute('checked');
-    } else {
+        uploadRadio.removeAttribute('checked');
+    } else if (val == '3') {
         newInput.setAttribute('hidden', '');
         existingInput.setAttribute('hidden', '');
+        localLinks.removeAttribute('hidden');
+        uploadData.setAttribute('hidden', '');
+
         newRadio.removeAttribute('checked');
         existingRadio.removeAttribute('checked');
         localRadio.setAttribute('checked', '');
+        uploadRadio.removeAttribute('checked');
+    } else {
+        console.log('here')
+        newInput.setAttribute('hidden', '');
+        existingInput.setAttribute('hidden', '');
+        localLinks.setAttribute('hidden', '');
+        uploadData.removeAttribute('hidden');
+
+        newRadio.removeAttribute('checked');
+        existingRadio.removeAttribute('checked');
+        localRadio.removeAttribute('checked');
+        uploadRadio.setAttribute('checked', '');
     }
 }
 
@@ -60,20 +86,15 @@ function loadNewOrExistingInputListener() {
     const newRadio = document.getElementById('new-radio');
     const existingRadio = document.getElementById('existing-radio');
     const localRadio = document.getElementById('local-radio');
-    for (const ele of [newRadio, existingRadio, localRadio]) {
+    const uploadRadio = document.getElementById('upload-radio');
+    for (const ele of [newRadio, existingRadio, localRadio, uploadRadio]) {
         ele.addEventListener('click', (e) => {
             setNewOrExisting(e.target.value);
         });
     }
 }
 
-// TODO remove once mvp is reached
-function loadClearButtonListener() {
-    var ele = document.getElementById('clear-button');
-    ele.addEventListener('click', () => {
-        clearData()
-    })
-}
+// TODO listeners for the skip links
 
 function loadNextButtonListener() {
     var ele = document.getElementById('next-button-1');
@@ -109,7 +130,7 @@ function setNewOrExisting(val) {
 function storeItems() {
     const val = global.newOrExisting
     if (val == '1') {
-        clearData(); // TODO, this should not happen on click of next, only when the clear data is clicked, this should happen or if a new title is entered
+        clearData();
         global.projectFormData.title = document.getElementById('project-name-input').value
         storeData(global.projectFormData)
     } else if (val == '2') {
