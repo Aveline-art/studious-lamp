@@ -10,6 +10,7 @@ function main() {
 
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
+        loadOtherCheckboxListener();
         loadNextButtonListener();
         loadBackButtonListener();
     });
@@ -37,6 +38,13 @@ function setFields(data) {
 ///////////////////////
 /// Event Listeners ///
 ///////////////////////
+
+function loadOtherCheckboxListener() {
+    const ele = document.getElementById('other-checkbox');
+    ele.addEventListener('change', (e) => {
+        toogleTechnologies(e)
+    })
+}
 
 function loadNextButtonListener() {
     const ele = document.getElementById('next-button-2');
@@ -81,6 +89,15 @@ function findLink(links, website) {
     return null
 }
 
+function toogleTechnologies(e) {
+    const ele = document.getElementById('other-technologies').parentElement;
+    if (e.target.checked) {
+        ele.removeAttribute('hidden');
+    } else {
+        ele.setAttribute('hidden', '');
+    }
+}
+
 function setCheckBoxFields(arr, element) {
     arr = arr.map(name => name.toLowerCase());
     const inputs = element.getElementsByTagName('input');
@@ -117,13 +134,12 @@ function storeItems() {
             url: document.getElementById('wiki-url').value,
         }
     ];
-    // Needs to redo and parse
-    data.technologies = document.getElementById('technologies').value.split('\n');
+    data.technologies = parseCheckboxFields(document.getElementById('technologies')).filter((v) => v != 'Other');
     data.tools = document.getElementById('tools').value.replaceAll('\n', ', ');
     data.location = document.getElementById('locations').value.split('\n')
-    data['program-area'] = parseProgramArea();
+    data['program-area'] = parseCheckboxFields(document.getElementById('program-areas'));
+    data._noMD['other-technologies'] = document.getElementById('other-technologies').value.split('\n')
 
-    // TODO this needs to be skipped if identification is retrieved from existing data, or if no GH link is given
     const gitHubURL = findLink(data.links, 'github')
     if (gitHubURL) {
         const [owner, repo] = parseGitHubURL(gitHubURL)
@@ -140,9 +156,8 @@ function storeItems() {
     }
 }
 
-function parseProgramArea() {
-    const programAreas = document.getElementById('program-areas');
-    const inputs = programAreas.getElementsByTagName('input');
+function parseCheckboxFields(ele) {
+    const inputs = ele.getElementsByTagName('input');
     var arr = []
     for (const input of inputs) {
         if (input.checked) {

@@ -18,6 +18,8 @@ visible: ${data.visible}
 status: ${data.status}
 program-area: ${'\n  - ' + data['program-area'].join('\n  - ')}
 ---
+
+other-technologies: ${data._noMD['other-technologies'].join(', ')}
 `
 
     return projectMdTemplate.trim()

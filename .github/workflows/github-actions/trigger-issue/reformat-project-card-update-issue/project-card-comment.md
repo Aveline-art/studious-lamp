@@ -6,6 +6,7 @@ As a developer on the website, we have to make sure that the projects of our org
 
 - [ ] Locate the project's markdown file, if it exists. Otherwise, create it.
 - [ ] Verify that all required fields are there.
+- [ ] If there are other technologies listed, only add them to technologies if they are approved.
 - [ ] Replace the file with the markdown located in the Instructions/Resources section below.
 
 ### Instructions/Resources
