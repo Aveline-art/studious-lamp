@@ -53,7 +53,7 @@
         <label class="form-label" for="locations">List out your project's meeting locations (use a newline for
             each):</label>
         <textarea class="form-control" id="locations" name="locations"
-            placeholder="Downtown LA&#10;Santa Monica&#10;South LA" rows="6" cols="50"></textarea>
+            placeholder="Downtown LA&#10;Remote&#10;Santa Monica&#10;South LA" rows="6" cols="50"></textarea>
     </div>
     <div class="col mb-3" id="program-areas">
         <label class="form-label">What are the program areas? Pick all that apply.</label>
@@ -83,16 +83,16 @@
             </div>
             {% endfor %}
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Other" id="other" name="other">
+                <input class="form-check-input" type="checkbox" value="Other" id="other-checkbox" name="other">
                 <label class="form-check-label" for="other">
                     Other, please specify
                 </label>
             </div>
     </div>
-    <div class="col-4 mb-3 visually-hidden">
+    <div class="col-4 mb-3" hidden>
         <label class="form-label" for="tools">List out your project's technologies (use a newline for each):</label>
-        <textarea class="form-control" id="tools" name="tools"
-            placeholder="Figma&#10;Google Drive&#10;Zoom&#10;Google Analytics" rows="6" cols="50"></textarea>
+        <textarea class="form-control" id="other-technologies" name="tools"
+            placeholder="GitHub Pages&#10;Jekyll&#10;Markdown" rows="6" cols="50"></textarea>
     </div>
 </div>
 

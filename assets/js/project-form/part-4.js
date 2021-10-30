@@ -6,8 +6,6 @@ function main() {
     setFields(global.projectFormData)
     global.projectFormData._noMD.addStateListener('image', listenProjectUploadImage)
     global.projectFormData._noMD.addStateListener('image-hero', listenProjectUploadHero)
-    //global.projectFormData.addStateListener('image', listenProjectImage)
-    //global.projectFormData.addStateListener('image-hero', listenProjectHero)
     global.addStateListener('projectFormData', listenProjectFormData)
     loadListeners();
 }
@@ -114,17 +112,6 @@ function setHeroImage() {
 
 function listenProjectFormData(data) {
     setFields(data)
-}
-
-// TODO refactor this to remove redundant code
-function listenProjectImage(image) {
-    const ele = document.getElementById('project-image-preview')
-    ele.src = global.projectFormData._noMD.image || '.' + image
-}
-
-function listenProjectHero(image) {
-    const ele = document.getElementById('project-hero-preview');
-    ele.src = global.projectFormData._noMD['image-hero'] || '.' + image
 }
 
 function listenProjectUploadImage(image) {
