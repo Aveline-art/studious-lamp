@@ -41,16 +41,15 @@
             {% endfor %}
         </select>
     </div>
+    <div class="col-4">
+        <div class="mb-3" id="upload-data" hidden>
+            <input type="file" class="form-control mb-3" id="data-file" name="data-file" accept=".md, .json">
+        </div>
 
-    <div class="col-4 mb-3" id="local-links" hidden>
-        <a href="./preview" class="link-primary">Skip to Preview</a>
-        <a href="./results" class="link-primary">Skip to Results</a>
-    </div>
-
-    <div class="col-4 mb-3" id="upload-data" hidden>
-        <input type="file" class="form-control mb-3" id="data-file" name="data-file" accept=".md, .json">
-        <a href="./preview" class="link-primary">Skip to Preview</a>
-        <a href="./results" class="link-primary">Skip to Results</a>
+        <div class="mb-3" id="local-links" hidden>
+            <a href="./preview" class="row link-primary" id="preview-skip-link">Skip to Preview</a>
+            <a href="./results" class="row link-primary" id="results-skip-link">Skip to Results</a>
+        </div>
     </div>
 </div>
 <button type="button" class="btn btn-primary mb-3" id="next-button-1">Next</button>

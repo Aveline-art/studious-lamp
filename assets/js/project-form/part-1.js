@@ -12,6 +12,7 @@ function main() {
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
         loadNewOrExistingInputListener()
+        loadSkipLinkListener()
         loadNextButtonListener()
     });
 }
@@ -64,10 +65,9 @@ function setFields(val) {
         localRadio.setAttribute('checked', '');
         uploadRadio.removeAttribute('checked');
     } else {
-        console.log('here')
         newInput.setAttribute('hidden', '');
         existingInput.setAttribute('hidden', '');
-        localLinks.setAttribute('hidden', '');
+        localLinks.removeAttribute('hidden');
         uploadData.removeAttribute('hidden');
 
         newRadio.removeAttribute('checked');
@@ -94,7 +94,15 @@ function loadNewOrExistingInputListener() {
     }
 }
 
-// TODO listeners for the skip links
+function loadSkipLinkListener() {
+    var ele1 = document.getElementById('preview-skip-link');
+    var ele2 = document.getElementById('results-skip-link');
+    [ele1, ele2].forEach(item => {
+        item.addEventListener('click', () => {
+            loadAndStoreData()
+        });
+    });
+}
 
 function loadNextButtonListener() {
     var ele = document.getElementById('next-button-1');
