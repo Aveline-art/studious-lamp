@@ -12,7 +12,7 @@ function main() {
         linkCreator(projectLinksNode, data.links);
         document.getElementById('tools').innerText = loremIpsum(data.tools, 20)
         document.getElementById('languages').innerText = joinArray(loremIpsum(data._noMD.language, 3))
-        document.getElementById('technologies').innerText = joinArray(loremIpsum(data.technologies, 3))
+        document.getElementById('technologies').innerText = joinArray(loremIpsum([...data.technologies, ...data._noMD['other-technologies']], 3))
         document.getElementById('project-description').innerText = loremIpsum(data.description, 445)
     })
 }
@@ -31,7 +31,7 @@ function setStatusIndicator(ele, status) {
 
 function joinArray(arr) {
     if (arr) {
-        return arr.join(', ')
+        return arr.sort().join(', ')
     } else {
         return ''
     }
