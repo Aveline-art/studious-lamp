@@ -1,14 +1,29 @@
 // Imports
 import { toogleSeries } from '../utility.js';
-import { global, projectData, clearData, storeData, loadAndStoreData } from './state.js';
+import { global, projectData, clearData, storeData, loadLocalStorageData } from './state.js';
+
+// Globals
+const newRadio = document.getElementById('new-radio');
+const existingRadio = document.getElementById('existing-radio');
+const localRadio = document.getElementById('local-radio');
+const uploadRadio = document.getElementById('upload-radio');
+const allRadio = [newRadio, existingRadio, localRadio, uploadRadio]
+
+const newInput = document.getElementById('new-input');
+const existingInput = document.getElementById('existing-input');
+const localLinks = document.getElementById('local-links');
+const uploadData = document.getElementById('upload-data');
+const allInput = [newInput, existingInput, localLinks, uploadData]
 
 
+// main
 function main() {
-    setFields(global.newOrExisting)
+    setFields(global.newOrExisting);
     global.addStateListener('newOrExisting', listenNewOrExisting);
     loadListeners();
 }
 
+// loadListeners
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
         loadNewOrExistingInputListener()
@@ -23,58 +38,39 @@ function loadListeners() {
 /////////////////////
 
 function setFields(val) {
-    const newInput = document.getElementById('new-input');
-    const existingInput = document.getElementById('existing-input');
-    const localLinks = document.getElementById('local-links');
-    const uploadData = document.getElementById('upload-data');
-
-    const newRadio = document.getElementById('new-radio');
-    const existingRadio = document.getElementById('existing-radio');
-    const localRadio = document.getElementById('local-radio');
-    const uploadRadio = document.getElementById('upload-radio');
-
-
-    if (val == '1') {
-        newInput.removeAttribute('hidden');
-        existingInput.setAttribute('hidden', '');
-        localLinks.setAttribute('hidden', '');
-        uploadData.setAttribute('hidden', '');
-
-        newRadio.setAttribute('checked', '');
-        existingRadio.removeAttribute('checked');
-        localRadio.removeAttribute('checked');
-        uploadRadio.removeAttribute('checked');
-    } else if (val == '2') {
-        newInput.setAttribute('hidden', '');
-        existingInput.removeAttribute('hidden');
-        localLinks.setAttribute('hidden', '');
-        uploadData.setAttribute('hidden', '');
-
-        newRadio.removeAttribute('checked');
-        existingRadio.setAttribute('checked', '');
-        localRadio.removeAttribute('checked');
-        uploadRadio.removeAttribute('checked');
-    } else if (val == '3') {
-        newInput.setAttribute('hidden', '');
-        existingInput.setAttribute('hidden', '');
-        localLinks.removeAttribute('hidden');
-        uploadData.setAttribute('hidden', '');
-
-        newRadio.removeAttribute('checked');
-        existingRadio.removeAttribute('checked');
-        localRadio.setAttribute('checked', '');
-        uploadRadio.removeAttribute('checked');
-    } else {
-        newInput.setAttribute('hidden', '');
-        existingInput.setAttribute('hidden', '');
-        localLinks.removeAttribute('hidden');
-        uploadData.removeAttribute('hidden');
-
-        newRadio.removeAttribute('checked');
-        existingRadio.removeAttribute('checked');
-        localRadio.removeAttribute('checked');
-        uploadRadio.setAttribute('checked', '');
+    const checkedObject = {
+        '0': newRadio,
+        '1': existingRadio,
+        '2': localRadio,
+        '3': uploadRadio,
     }
+
+    const showObject = {
+        '0': [newInput],
+        '1': [existingInput],
+        '2': [localLinks],
+        '3': [localLinks, uploadData],
+    }
+
+    function check(item) {
+        for (const radio of allRadio) {
+            radio.removeAttribute('checked')
+        }
+        item.setAttribute('checked', '')
+    }
+
+    function hidden(items) {
+        for (const input of allInput) {
+            if (items.includes(input)) {
+                input.removeAttribute('hidden')
+            } else {
+                input.setAttribute('hidden', '')
+            }
+        }
+    }
+
+    check(checkedObject[val])
+    hidden(showObject[val])
 }
 
 
@@ -83,11 +79,7 @@ function setFields(val) {
 ///////////////////////
 
 function loadNewOrExistingInputListener() {
-    const newRadio = document.getElementById('new-radio');
-    const existingRadio = document.getElementById('existing-radio');
-    const localRadio = document.getElementById('local-radio');
-    const uploadRadio = document.getElementById('upload-radio');
-    for (const ele of [newRadio, existingRadio, localRadio, uploadRadio]) {
+    for (const ele of allRadio) {
         ele.addEventListener('click', (e) => {
             setNewOrExisting(e.target.value);
         });
@@ -99,7 +91,7 @@ function loadSkipLinkListener() {
     var ele2 = document.getElementById('results-skip-link');
     [ele1, ele2].forEach(item => {
         item.addEventListener('click', () => {
-            loadAndStoreData()
+            storeItems()
         });
     });
 }
@@ -137,18 +129,20 @@ function setNewOrExisting(val) {
 
 function storeItems() {
     const val = global.newOrExisting
-    if (val == '1') {
+    if (val == '0') {
         clearData();
         global.projectFormData.title = document.getElementById('project-name-input').value
         storeData(global.projectFormData)
-    } else if (val == '2') {
+    } else if (val == '1') {
         clearData();
         const identification = document.getElementById('project-name-select').value;
         storeData(projectData[identification])
+    } else if (val == '2') {
+        loadLocalStorageData()
     } else if (val == '3') {
-        loadAndStoreData()
+        // #39 post MVP, .json or .md parser
     }
 }
 
-// Main call
+// main call
 main()

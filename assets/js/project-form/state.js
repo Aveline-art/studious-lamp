@@ -13,7 +13,7 @@ const projectData = {
 }
 
 var initialState = {
-    newOrExisting: '1',
+    newOrExisting: '0',
     rows: 1,
     projectFormData: {
         identification: '',
@@ -58,27 +58,37 @@ function main() {
 //////////////////////////////////
 
 /**
- * Adds, rather than replace, the data into projectFormData
- * @param {Object} data 
+ * Adds, rather than replace, the data into the global proxy. This will preserve the proxy object.
+ * @param {Object} data
  */
 function setProjectFormData(data) {
     Object.assign(global.projectFormData, data)
     global.runStateListener('projectFormData', global.projectFormData)
 }
 
+/**
+ * Stores data into both the global Proxy and localStorage.
+ * @param {Object} data
+ */
 function storeData(data) {
     setProjectFormData(data)
     localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
 }
 
+/**
+ * Clears information in both the global Proxy and localStorage.
+ */
 function clearData() {
     localStorage.clear();
     console.log('data has been cleared')
-    setProjectFormData(deep(initialState.projectFormData))
-    localStorage.setItem('projectFormData', JSON.stringify(global.projectFormData));
+    storeData(deep(initialState.projectFormData))
 }
 
-function loadAndStoreData() {
+
+/**
+ * Takes information from localStorage and places it into the global Proxy.
+ */
+function loadLocalStorageData() {
     const data = JSON.parse(localStorage.getItem('projectFormData'));
     storeData(data)
 }
@@ -86,4 +96,4 @@ function loadAndStoreData() {
 // Main call
 main()
 
-export { global, projectData, clearData, storeData, loadAndStoreData };
+export { global, projectData, clearData, storeData, loadLocalStorageData };
