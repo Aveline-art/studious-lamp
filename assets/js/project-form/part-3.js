@@ -1,9 +1,14 @@
+// Imports
 import { toggleSeries, createDomObject } from '../utility.js';
 import { global, storeData } from './state.js';
 
+// Globals
 const gitHubURLBase = 'https://github.com/';
 const gitHubAvatarURLBase = 'https://avatars.githubusercontent.com/';
+const numLeadsInput = document.getElementById('num-leads');
+const leaderShipRowsInput = document.getElementById('leadership-rows');
 
+// main
 function main() {
     setFields(global.projectFormData)
     global.addStateListener('rows', listenRows)
@@ -11,6 +16,7 @@ function main() {
     loadListeners();
 }
 
+// loadListeners
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
         loadNextButtonListener();
@@ -24,17 +30,16 @@ function loadListeners() {
 /// Field Setters ///
 /////////////////////
 
-function setFields(data) {
-    var num = data.length
+function setFields(leaders) {
+    var num = leaders.length
     if (num < 1) {
         num = 1
     } else if (num > 10) {
         num = 10
     }
 
-    setRows(num)
-    constructLeadershipRows(num, data)
-    document.getElementById('num-leads').value = num
+    constructLeadershipRows(num, leaders)
+    numLeadsInput.value = num
 }
 
 
@@ -43,8 +48,7 @@ function setFields(data) {
 ///////////////////////
 
 function loadNumLeadsInputListener() {
-    const ele = document.getElementById('num-leads')
-    ele.addEventListener('input', (e) => {
+    numLeadsInput.addEventListener('input', (e) => {
         setRows(e.target.value)
     });
 }
@@ -81,7 +85,7 @@ function setRows(val) {
 ///////////////////////
 
 function listenRows(num) {
-    const leadershipRows = document.getElementById('leadership-rows');
+    const leadershipRows = leaderShipRowsInput
     var currentLen = leadershipRows.children.length
 
     while (currentLen < num) {
@@ -104,7 +108,7 @@ function listenLeaders(data) {
 ///////////////////////
 
 function constructLeadershipRows(rows, leadership=[]) {
-    const leadershipRows = document.getElementById('leadership-rows');
+    const leadershipRows = leaderShipRowsInput
     while (leadershipRows.firstChild) {
         leadershipRows.removeChild(leadershipRows.firstChild);
     }
@@ -184,8 +188,7 @@ function gatherLeaders() {
         'leaderGithub':'github',
     }
 
-    var ele = document.getElementById('leadership-rows');
-    var children = ele.childNodes;
+    var children = leaderShipRowsInput.childNodes;
     var leaders = []
     for (const child of children) {
         var leader = {}
@@ -205,5 +208,5 @@ function gatherLeaders() {
     return leaders
 }
 
-// Main call
+// main call
 main()
