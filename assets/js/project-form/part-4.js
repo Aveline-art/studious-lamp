@@ -1,7 +1,14 @@
+// Imports
 import { toggleSeries } from '../utility.js';
 import { global, storeData } from './state.js';
 
+// Globals
+const projectImagePreview = document.getElementById('project-image-preview');
+const projectHeroPreview = document.getElementById('project-hero-preview');
+const projectImageAlt = document.getElementById('project-image-alt');
+const projectHeroAlt = document.getElementById('project-hero-alt');
 
+// main
 function main() {
     setFields(global.projectFormData)
     global.projectFormData._noMD.addStateListener('image', listenProjectUploadImage)
@@ -10,6 +17,7 @@ function main() {
     loadListeners();
 }
 
+// loadListeners
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
         loadBackButtonListener();
@@ -25,23 +33,11 @@ function loadListeners() {
 /////////////////////
 
 function setFields(data) {
-    var ele = document.getElementById('project-image-preview')
-    if (data._noMD.image) {
-        ele.src = data._noMD.image
-    }
-    else if (data.image) {
-        ele.src = '.' + data.image
-    }
+    projectImagePreview.src = imageToDisplay(data._noMD.image, data.image)
+    projectHeroPreview.src = imageToDisplay(data._noMD['image-hero'], data['image-hero'])
 
-    var ele = document.getElementById('project-hero-preview');
-    if (data._noMD['image-hero']) {
-        ele.src = data._noMD['image-hero']
-    } else if (data['image-hero']) {
-        ele.src = '.' + data['image-hero']
-    }
-
-    document.getElementById('project-image-alt').value = data.alt
-    document.getElementById('project-hero-alt').value = data['alt-hero']
+    projectImageAlt.value = data.alt
+    projectHeroAlt.value = data['alt-hero']
 }
 
 
@@ -115,13 +111,11 @@ function listenProjectFormData(data) {
 }
 
 function listenProjectUploadImage(image) {
-    const ele = document.getElementById('project-image-preview')
-    ele.src = image || '.' + global.projectFormData.image
+    projectImagePreview.src = imageToDisplay(image, global.projectFormData.image)
 }
 
 function listenProjectUploadHero(image) {
-    const ele = document.getElementById('project-hero-preview');
-    ele.src = image || '.' + global.projectFormData['image-hero']
+    projectHeroPreview.src = imageToDisplay(image, global.projectFormData['image-hero'])
 }
 
 
@@ -134,10 +128,14 @@ function storeItems() {
         _noMD: {}
     }
 
-    data.alt = document.getElementById('project-image-alt').value
-    data['alt-hero'] = document.getElementById('project-hero-alt').value
+    data.alt = projectImageAlt.value
+    data['alt-hero'] = projectHeroAlt.value
 
     storeData(data)
+}
+
+function imageToDisplay(primary, other) {
+    return primary || '.' + other
 }
 
 // main call
