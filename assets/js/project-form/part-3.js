@@ -196,11 +196,13 @@ function gatherLeaders() {
 
         const inputs = child.getElementsByTagName('input');
         for (const input of inputs) {
+            const value = input.value
+
             if (input.name == 'leaderGithub') {
-                leader['links'][leaderShipInfoObj[input.name]] = `${gitHubURLBase}${input.value}`
-                leader['picture'] = `${gitHubAvatarURLBase}${input.value}`
+                leader['links'][leaderShipInfoObj[input.name]] = value ? `${gitHubURLBase}${value}` : ''
+                leader['picture'] = value ? `${gitHubAvatarURLBase}${value}` : ''
             } else {
-                leader[leaderShipInfoObj[input.name]] = input.value;
+                leader[leaderShipInfoObj[input.name]] = value;
             }
         }
         leaders.push(leader);

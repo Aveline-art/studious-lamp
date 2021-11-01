@@ -4,9 +4,7 @@ function main() {
     document.addEventListener('DOMContentLoaded', () => {
         const data = JSON.parse(localStorage.getItem('projectFormData'));
 
-        const projectStatusEle = document.getElementById('project-status')
-        projectStatusEle.innerText = loremIpsum(data.status, 6)
-        setStatusIndicator(projectStatusEle, data.status)
+        setStatusIndicator(document.getElementById('project-status'), data.status)
         document.getElementById('project-location').innerText = joinArray(loremIpsum(data.location, 2))
         const projectLinksNode = document.getElementById('project-links')
         linkCreator(projectLinksNode, data.links);
@@ -25,11 +23,13 @@ function setStatusIndicator(ele, status) {
         'rebooting': 'status-Rebooting',
     }
 
+    ele.innerText = loremIpsum(status, 6)
     const parent = ele.parentElement
     parent.classList.add(status ? indicators[status.toLowerCase()] : 'status-Active')
 }
 
 function joinArray(arr) {
+    arr = arr.filter((i) => i != '');
     if (arr) {
         return arr.sort().join(', ')
     } else {

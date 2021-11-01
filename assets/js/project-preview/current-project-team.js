@@ -19,7 +19,7 @@ function linkCreator(ele, args) {
         })
 
         const leaderGitHubNode = createDomObject('a', {
-            'href': item.links.github,
+            'href': item.links.github || 'https://github.com/elizabethhonest',
             'target': '_blank',
             'title': 'GitHub Profile',
         })
