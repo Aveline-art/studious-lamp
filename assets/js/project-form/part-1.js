@@ -1,5 +1,5 @@
 // Imports
-import { toogleSeries } from '../utility.js';
+import { toggleSeries } from '../utility.js';
 import { global, projectData, clearData, storeData, loadLocalStorageData } from './state.js';
 
 // Globals
@@ -100,7 +100,7 @@ function loadNextButtonListener() {
     var ele = document.getElementById('next-button-1');
     ele.addEventListener('click', () => {
         storeItems();
-        toogleSeries('form-parts', 'form-part-2');
+        toggleSeries('form-parts', 'form-part-2');
     });
 }
 

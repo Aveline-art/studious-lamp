@@ -1,13 +1,29 @@
-import { toogleSeries } from '../utility.js';
+// Imports
+import { toggleSeries } from '../utility.js';
 import { global, storeData } from './state.js';
 
+// Globals
+const statusInput = document.getElementById('project-status')
+const descriptionInput =document.getElementById('project-description')
+const githubInput = document.getElementById('github-url')
+const slackInput = document.getElementById('slack-url')
+const websiteInput = document.getElementById('website-url')
+const wikiInput = document.getElementById('wiki-url')
+const toolsInput = document.getElementById('tools')
+const locationsInput = document.getElementById('locations')
+const programAreasInput = document.getElementById('program-areas')
+const technologiesInput  = document.getElementById('technologies')
+const otherTechnologiesInput = document.getElementById('other-technologies')
 
+
+// main
 function main() {
     setFields(global.projectFormData);
     global.addStateListener('projectFormData', listenProjectFormData);
     loadListeners();
 }
 
+// loadListeners
 function loadListeners() {
     document.addEventListener("DOMContentLoaded", function () {
         loadOtherCheckboxListener();
@@ -22,16 +38,16 @@ function loadListeners() {
 /////////////////////
 
 function setFields(data) {
-    document.getElementById('project-status').value = data.status
-    document.getElementById('project-description').value = data.description
-    document.getElementById('github-url').value = findLink(data.links, 'github')
-    document.getElementById('slack-url').value = findLink(data.links, 'slack')
-    document.getElementById('website-url').value = findLink(data.links, 'site')
-    document.getElementById('wiki-url').value = findLink(data.links, 'wiki')
-    document.getElementById('tools').value = data.tools.replaceAll(', ','\n')
-    document.getElementById('locations').value = data.location.join('\n')
-    setCheckBoxFields(data['program-area'], document.getElementById('program-areas'))
-    setCheckBoxFields(data.technologies, document.getElementById('technologies'))
+    statusInput.value = data.status
+    descriptionInput.value = data.description
+    githubInput.value = findLink(data.links, 'github')
+    slackInput.value = findLink(data.links, 'slack')
+    websiteInput.value = findLink(data.links, 'site')
+    wikiInput.value = findLink(data.links, 'wiki')
+    toolsInput.value = data.tools.replaceAll(', ','\n')
+    locationsInput.value = data.location.join('\n')
+    setCheckBoxFields(data['program-area'], programAreasInput)
+    setCheckBoxFields(data.technologies, technologiesInput)
 }
 
 
@@ -42,7 +58,7 @@ function setFields(data) {
 function loadOtherCheckboxListener() {
     const ele = document.getElementById('other-checkbox');
     ele.addEventListener('change', (e) => {
-        toogleTechnologies(e)
+        toggleTechnologies(e)
     })
 }
 
@@ -50,7 +66,7 @@ function loadNextButtonListener() {
     const ele = document.getElementById('next-button-2');
     ele.addEventListener('click', () => {
         storeItems();
-        toogleSeries('form-parts', 'form-part-3');
+        toggleSeries('form-parts', 'form-part-3');
     });
 }
 
@@ -58,7 +74,7 @@ function loadBackButtonListener() {
     const ele = document.getElementById('back-button-2');
     ele.addEventListener('click', () => {
         storeItems();
-        toogleSeries('form-parts', 'form-part-1');
+        toggleSeries('form-parts', 'form-part-1');
     });
 }
 
@@ -89,8 +105,8 @@ function findLink(links, website) {
     return null
 }
 
-function toogleTechnologies(e) {
-    const ele = document.getElementById('other-technologies').parentElement;
+function toggleTechnologies(e) {
+    const ele = otherTechnologiesInput.parentElement;
     if (e.target.checked) {
         ele.removeAttribute('hidden');
     } else {
@@ -114,37 +130,37 @@ function storeItems() {
         _noMD: {}
     }
 
-    data.status = document.getElementById('project-status').value;
-    data.description = document.getElementById('project-description').value;
+    data.status = statusInput.value;
+    data.description = descriptionInput.value;
     data.links = [
         {
             name: 'Github',
-            url: document.getElementById('github-url').value,
+            url: githubInput.value,
         },
         {
             name: 'Slack',
-            url: document.getElementById('slack-url').value,
+            url: slackInput.value,
         },
         {
             name: 'Website',
-            url: document.getElementById('website-url').value,
+            url: websiteInput.value,
         },
         {
             name: 'Wiki',
-            url: document.getElementById('wiki-url').value,
+            url: wikiInput.value,
         }
     ];
-    data.technologies = parseCheckboxFields(document.getElementById('technologies')).filter((v) => v != 'Other');
-    data.tools = document.getElementById('tools').value.replaceAll('\n', ', ');
-    data.location = document.getElementById('locations').value.split('\n')
-    data['program-area'] = parseCheckboxFields(document.getElementById('program-areas'));
-    data._noMD['other-technologies'] = document.getElementById('other-technologies').value.split('\n')
+    data.technologies = parseCheckboxFields(technologiesInput).filter((v) => v != 'Other');
+    data.tools = toolsInput.value.replaceAll('\n', ', ');
+    data.location = locationsInput.value.split('\n')
+    data['program-area'] = parseCheckboxFields(programAreasInput);
+    data._noMD['other-technologies'] = otherTechnologiesInput.value.split('\n')
 
     const gitHubURL = findLink(data.links, 'github')
     if (gitHubURL) {
         const [owner, repo] = parseGitHubURL(gitHubURL)
-        const repoIdPromise = getGitHubRepoId(owner, repo)
-        const repoLanguagePromise = getGitHubRepoLanguage(owner, repo)
+        const repoIdPromise = getGHAPIData(`https://api.github.com/repos/${owner}/${repo}`)
+        const repoLanguagePromise = getGHAPIData(`https://api.github.com/repos/${owner}/${repo}/languages`)
 
         Promise.all([repoIdPromise, repoLanguagePromise]).then((results) => {
             data.identification = results[0].id.toString()
@@ -167,47 +183,30 @@ function parseCheckboxFields(ele) {
     return arr
 }
 
-function getGitHubRepoId(owner, repo) {
-    return new Promise((resolve) => {
-        try {
-            fetch(`https://api.github.com/repos/${owner}/${repo}`)
-                .then(response => { 
-                    if (response.status == 200) {
-                        resolve(response.json()) 
-                    } else {
-                        resolve(null)
-                    }
-                })
-        }
-        catch {
-            resolve('')
-        }
-    });
-}
-
-function getGitHubRepoLanguage(owner, repo) {
-    return new Promise((resolve) => {
-        try {
-            fetch(`https://api.github.com/repos/${owner}/${repo}/languages`)
-                .then(response => { 
-                    if (response.status == 200) {
-                        resolve(response.json()) 
-                    } else {
-                        resolve(null)
-                    }
-                })
-        }
-        catch {
-            resolve('')
-        }
-    });
-}
-
 function parseGitHubURL(link) {
     const regexp = /github.com\/(.*?)\/(.*)/i
     const results = link.match(regexp);
     return [results[1].replace('/', ''), results[2].replace('/', '')]
 }
+
+function getGHAPIData(apiLink) {
+    return new Promise((resolve) => {
+        try {
+            fetch(apiLink)
+                .then(response => { 
+                    if (response.status == 200) {
+                        resolve(response.json()) 
+                    } else {
+                        resolve(null)
+                    }
+                })
+        }
+        catch {
+            resolve('')
+        }
+    });
+}
+
 
 // Main call
 main()

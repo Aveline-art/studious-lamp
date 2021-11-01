@@ -1,4 +1,4 @@
-import { toogleSeries } from '../utility.js';
+import { toggleSeries } from '../utility.js';
 import { global, storeData } from './state.js';
 
 
@@ -53,7 +53,7 @@ function loadBackButtonListener() {
     const ele = document.getElementById('back-button-4');
     ele.addEventListener('click', () => {
         storeItems();
-        toogleSeries('form-parts', 'form-part-3');
+        toggleSeries('form-parts', 'form-part-3');
     });
 }
 

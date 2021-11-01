@@ -1,4 +1,4 @@
-import { toogleSeries, createDomObject } from '../utility.js';
+import { toggleSeries, createDomObject } from '../utility.js';
 import { global, storeData } from './state.js';
 
 const gitHubURLBase = 'https://github.com/';
@@ -53,7 +53,7 @@ function loadNextButtonListener() {
     const ele = document.getElementById('next-button-3');
     ele.addEventListener('click', () => {
         storeItems();
-        toogleSeries('form-parts', 'form-part-4');
+        toggleSeries('form-parts', 'form-part-4');
     });
 }
 
@@ -61,7 +61,7 @@ function loadBackButtonListener() {
     var ele = document.getElementById('back-button-3');
     ele.addEventListener('click', () => {
         storeItems();
-        toogleSeries('form-parts', 'form-part-2');
+        toggleSeries('form-parts', 'form-part-2');
     });
 }
 

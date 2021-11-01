@@ -89,7 +89,7 @@ function loremIpsum(text, len) {
     }
 }
 
-function toogleSeries(seriesId, targetId) {
+function toggleSeries(seriesId, targetId) {
     const series = document.getElementById(seriesId);
     const children = series.children;
     for (const child of children) {
@@ -101,4 +101,4 @@ function toogleSeries(seriesId, targetId) {
 
 
 
-export { createDomObject, createState, deep, loremIpsum, toogleSeries };
+export { createDomObject, createState, deep, loremIpsum, toggleSeries };
