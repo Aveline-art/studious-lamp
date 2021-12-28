@@ -50,7 +50,7 @@ links:
 looking:
   - category: UI/UX
     skill: UI/UX Designer
-technologies:
+# technologies:
 location:
   - Remote
 partner:

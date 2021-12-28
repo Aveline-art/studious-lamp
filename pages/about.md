@@ -16,7 +16,3 @@ The goal of this proof-of-concept is to streamline the process by:
 3. a translator that directly translate inputs from the form into the project's .yml file
 
 This website is built on Jekyll, with the help of Bootstrap for styling. This choice of technology reflects the technology used on the website project. Indeed, I believe that, should this proof-of-concept is accepted, it will live as a part of the website project's development website. It will provide an easily accessible space for project managers to update their project's data. At the same time, the website project will be the maintainer of this code, should its format ever needs to be changed.
-
-### Why ArtorSaki?
-
-Why is the form called ArtorSaki? There is no special reason. The meaning behind the name is a portmanteau of two characters from the nonsensically-named anime, [Fate/Stay Night: Unlimited Blade Works](https://en.wikipedia.org/wiki/Fate/stay_night:_Unlimited_Blade_Works_(TV_series)). Specifically, the characters are *Artoria Pendragon*, a female version of King Arthur, and *Sasaki Kojirou*, a legendary Japanese swordsman. These two characters had a grand total two scenes together in the entire 25 episode series. Nevertheless, the creator of this website was completely enamoured with their open flirtations with one another. Like with all anime fangirls, the appropriate way to [ship](https://en.wikipedia.org/wiki/Shipping_(fandom)) two characters is to combine their names. Hence, the name ArtorSaki was born.
